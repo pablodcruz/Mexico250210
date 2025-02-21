@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main {
 
@@ -93,6 +95,11 @@ public class Main {
         app.get("/todos", todoController::getAllTodos);
 
         System.out.println("Server running on http://localhost:7000/");
+
+
+        List<String> names = Arrays.asList("Charlie", "Alice", "Bob");
+        names.sort((a, b) -> a.compareTo(b));
+        System.out.println(names); // [Alice, Bob, Charlie]
     }
 
     // Reset the DB to a clean state each time
