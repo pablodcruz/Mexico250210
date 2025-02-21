@@ -1,0 +1,5 @@
+# Sample Introduction
+
+- Hello, I’m a full-stack software developer with a strong passion for back-end design and application security. In my most recent project, I created a RESTful back-end application using Java 17, JDBC, and the Javalin framework. The application features role-based access control: standard users have to log in to access protected endpoints, and manager users have elevated permissions allowing them to approve or reject specific transactions—similar to handling loan approvals in a financial system.
+
+- Throughout development, I tested all the endpoints with Postman to ensure consistent, reliable functionality. This experience deepened my understanding of authentication flows, database connectivity, and effective API design. More broadly, I enjoy working across the full stack: from designing database schemas and implementing back-end logic to setting up front-end frameworks and CI/CD pipelines. Ultimately, I’m excited about leveraging these skills to contribute to a team that values clean, maintainable code and scalable solutions.
