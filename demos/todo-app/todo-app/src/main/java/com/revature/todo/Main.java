@@ -96,7 +96,6 @@ public class Main {
 
         System.out.println("Server running on http://localhost:7000/");
 
-
         List<String> names = Arrays.asList("Charlie", "Alice", "Bob");
         names.sort((a, b) -> a.compareTo(b));
         System.out.println(names); // [Alice, Bob, Charlie]

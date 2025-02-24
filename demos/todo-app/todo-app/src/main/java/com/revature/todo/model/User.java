@@ -5,7 +5,9 @@ public class User {
     private String username;
     private String passwordHash;
 
-    public User() {}
+    public User() {
+
+    }
 
     public User(int id, String username, String passwordHash) {
         this.id = id;
@@ -21,4 +23,13 @@ public class User {
 
     public String getPasswordHash() { return passwordHash; }
     public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                '}';
+    }
 }
