@@ -3,6 +3,7 @@ package com.revature.todo.service;
 import com.revature.todo.dao.UserDao;
 import com.revature.todo.model.User;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class UserService {
@@ -13,19 +14,22 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public boolean registerUser(String username, String rawPassword) {
+
+
+    public User registerUser(String username, String rawPassword, LocalDate dateOfBirth) {
         // Typically, you'd hash this with BCrypt or Argon2
         String hashed = "HASHED_" + rawPassword;
 
         if (userDao.getUserByUsername(username) != null) {
-            return false; // username exists
+            return null; // username exists
         }
 
         User newUser = new User();
         newUser.setUsername(username);
         newUser.setPasswordHash(hashed);
-        userDao.createUser(newUser);
-        return true;
+        newUser.setDateOfBirth(dateOfBirth);
+
+        return userDao.createUser(newUser);
     }
 
     public boolean loginUser(String username, String rawPassword) {

@@ -3,6 +3,7 @@ package com.revature.todo.dao;
 import com.revature.todo.model.User;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class UserDao {
     private final String dbUser;
     private final String dbPassword;
 
+
     public UserDao(String url, String dbUser, String dbPassword) {
         this.url = url;
         this.dbUser = dbUser;
@@ -18,8 +20,9 @@ public class UserDao {
     }
 
     public User createUser(User newUser) {
-        String sql = "INSERT INTO users (username, password_hash) VALUES (?, ?)";
+        String sql = "INSERT INTO users (username, password_hash, date_of_birth) VALUES (?, ?, ?)";
 
+        //try-with-resources
         try (Connection conn = DriverManager.getConnection(url, dbUser, dbPassword);
              // Note: We request generated keys if needed
              // maybe in the future we redirect the user and use this key to get their todos
@@ -28,6 +31,8 @@ public class UserDao {
 
             stmt.setString(1, newUser.getUsername());
             stmt.setString(2, newUser.getPasswordHash());
+            stmt.setObject(3, newUser.getDateOfBirth());
+
 
             stmt.executeUpdate();
 
@@ -59,7 +64,8 @@ public class UserDao {
                     return new User(
                             rs.getInt("id"),
                             rs.getString("username"),
-                            rs.getString("password_hash")
+                            rs.getString("password_hash"),
+                            rs.getObject("date_of_birth", LocalDate.class)
                     );
                 }
             }
@@ -77,11 +83,12 @@ public class UserDao {
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-
                 users.add(new User(
                         rs.getInt("id"),
                         rs.getString("username"),
-                        rs.getString("password_hash")
+                        rs.getString("password_hash"),
+                        rs.getObject("date_of_birth", LocalDate.class)
+
                 ));
             }
         } catch (SQLException e) {

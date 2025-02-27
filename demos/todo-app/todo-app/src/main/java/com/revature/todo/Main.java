@@ -1,5 +1,7 @@
 package com.revature.todo;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.revature.todo.controller.TodoController;
 import com.revature.todo.controller.UserController;
 import com.revature.todo.dao.TodoDao;
@@ -7,6 +9,7 @@ import com.revature.todo.dao.UserDao;
 import com.revature.todo.service.TodoService;
 import com.revature.todo.service.UserService;
 import io.javalin.Javalin;
+import io.javalin.json.JavalinJackson;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,7 +31,8 @@ public class Main {
         CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
             username VARCHAR(50) NOT NULL UNIQUE,
-            password_hash VARCHAR(255) NOT NULL
+            password_hash VARCHAR(255) NOT NULL,
+            date_of_birth DATE NOT NULL
         );
 
         CREATE TABLE IF NOT EXISTS todos (
@@ -43,10 +47,10 @@ public class Main {
     // 3) INSERT SAMPLE DATA
     private static final String INSERT_DATA_SQL = """
         -- Insert sample users
-        INSERT INTO users (username, password_hash)
+        INSERT INTO users (username, password_hash, date_of_birth)
         VALUES
-            ('knight_arthur', 'HASHED_excalibur'),
-            ('lady_gwen', 'HASHED_gauntlet');
+            ('knight_arthur', 'HASHED_excalibur', '01/22/1999'),
+            ('lady_gwen', 'HASHED_gauntlet', '01/22/1998');
 
         -- Insert sample todos
         INSERT INTO todos (user_id, title, is_completed)
@@ -61,6 +65,10 @@ public class Main {
         String jdbcUrl = "jdbc:postgresql://localhost:5432/todo_db";
         String dbUser = "postgres";
         String dbPassword = "final2kk";
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());  // 🔥 Enables LocalDate parsing
+
 
         // 4) Initialize DB
         resetDatabase(jdbcUrl, dbUser, dbPassword);
@@ -80,6 +88,10 @@ public class Main {
             // If needed, you can configure plugins, CORS, etc. here.
             // For example: config.plugins.enableCors(cors -> cors.add(anyOriginAllowed));
             // This is needed when working with web app on a browser.
+
+            //support for LocalDate through Jackson
+            config.jsonMapper(new JavalinJackson(objectMapper)); // ✅ Register the custom JSON mapper
+
         }).start(7000);
 
         // 7) Define routes using the new {param} syntax
