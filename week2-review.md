@@ -152,7 +152,7 @@
 ## SQL Transaction Properties
 - ACID
     - Atomicity: All or nothing, all statements that are part of the transaction must either succeed or fail
-    - Consistency: Maintaining relationships between tables (referential integrity) so that there will never to a reference to something that doesn't exist. Also, maintaining the constraints on data in each column
+    - Consistency: Maintaining relationships between tables (referential integrity) so that there will never be a reference to something that doesn't exist. Also, maintaining the constraints on the data in each column
     - Isolation: Transactions run independent from one another. No transaction should rely on another transaction to function. Isolation is achieved via **isolation levels**
     - Durability: Changes committed to the database by transactions should persist even after the computer is shut down, loses power, etc. since the data should be committed to the disk rather than existing only in temporary random-access memory (RAM)
 - Isolation problems

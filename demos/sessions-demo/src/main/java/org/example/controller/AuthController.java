@@ -34,7 +34,7 @@ public class AuthController {
         // Insert new user
         boolean created = createUserInDB(requestUser);
         if (created) {
-            ctx.status(201).json("{\"message\":\"User registered\"}");
+            ctx.status(201).json(requestUser);
         } else {
             ctx.status(500).json("{\"error\":\"Failed to register user\"}");
         }
@@ -52,7 +52,6 @@ public class AuthController {
         User requestUser = ctx.bodyAsClass(User.class);
         if (requestUser.getUsername() == null || requestUser.getPassword() == null) {
             ctx.status(400).json("{\"error\":\"Missing username or password\"}");
-            return;
         }
 
         // Check credentials. dbUser makes it clear we got this data from the db after verifying with the requestUser.
@@ -71,8 +70,9 @@ public class AuthController {
         // If valid, start a session
         HttpSession session = ctx.req().getSession(true);
         session.setAttribute("user", dbUser);
+        session.
 
-        ctx.status(200).json("{\"message\":\"Login successful\"}");
+        ctx.status(200).json(dbUser);
     }
 
     /**
@@ -82,17 +82,19 @@ public class AuthController {
     public static void checkLogin(Context ctx) {
         HttpSession session = ctx.req().getSession(false);
         if (session != null && session.getAttribute("user") != null) {
-            ctx.status(200).json("{\"message\":\"You are logged in\"}");
+            User user = (User) session.getAttribute("user");
+            ctx.status(200).json(user);
         } else {
             ctx.status(401).json("{\"error\":\"Not logged in\"}");
         }
+
     }
 
     /**
      * POST /logout
      */
     public static void logout(Context ctx) {
-        HttpSession session = ctx.req().getSession(false);
+        HttpSession session = ctx.req().getSession();
         if (session != null) {
             session.invalidate();
         }

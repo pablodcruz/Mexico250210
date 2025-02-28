@@ -66,9 +66,9 @@ public class Main {
         String dbUser = "postgres";
         String dbPassword = "final2kk";
 
+        // LocalDate datatype configuration
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());  // 🔥 Enables LocalDate parsing
-
 
         // 4) Initialize DB
         resetDatabase(jdbcUrl, dbUser, dbPassword);

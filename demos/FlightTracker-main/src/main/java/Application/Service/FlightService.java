@@ -34,6 +34,7 @@ public class FlightService {
      * @param flightDAO
      */
     public FlightService(FlightDAO flightDAO){
+        String x = "";
         this.flightDAO = flightDAO;
     }
 
@@ -53,7 +54,8 @@ public class FlightService {
      *         inform our provide the front-end client with information about the added Flight.
      */
     public Flight addFlight(Flight flight){
-        return null;
+        Flight flightWithId = flightDAO.insertFlight(flight);
+        return flightWithId;
     }
 
     /**
@@ -80,7 +82,7 @@ public class FlightService {
      * @return all flights in the database.
      */
     public List<Flight> getAllFlights() {
-        return null;
+        return flightDAO.getAllFlights();
     }
 
     /**
