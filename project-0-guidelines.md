@@ -92,11 +92,11 @@ Create a RESTful back-end application using **Java 17**, **JDBC**, and **Javalin
 1. **Controller/Handler Layer (Javalin)**  
    - Endpoints for authentication, user profile management, and loan handling.
    - **Role-based** access control: check if the user is logged in and (if needed) is a manager before allowing certain endpoints.
-
-2. **Service Layer**  
-   - **Authentication & Authorization**: 
+   - **Authentication & Authorization**:
      - Validate credentials.
      - Check user’s role (manager vs. user).
+
+2. **Service Layer**  
    - **Business Logic**:
      - Creating/updating loans (e.g., new or existing).
      - Approving/rejecting loans (manager only).
