@@ -1,0 +1,112 @@
+# ==============================
+# 🔹 Backend (Java + Maven + IntelliJ)
+# ==============================
+
+# Ignore compiled files & dependencies
+demos/**/target/
+demos/**/.mvn/
+demos/**/mvnw
+demos/**/mvnw.cmd
+
+# Ignore IntelliJ project files
+demos/**/.idea/
+demos/**/*.iml
+demos/**/*.ipr
+demos/**/*.iws
+
+# Ignore logs, OS-generated files, and local configs
+demos/**/logs/
+demos/**/*.log
+demos/**/hs_err_pid*
+demos/**/.DS_Store
+demos/**/Thumbs.db
+demos/**/.settings/
+demos/**/.classpath
+demos/**/.project
+
+# Ignore Spring Boot files (if applicable)
+demos/**/spring.log
+
+# Ignore database files
+demos/**/*.h2.db
+demos/**/*.mv.db
+demos/**/*.sqlite
+demos/**/*.db
+
+# Ignore Lombok generated files
+demos/**/.lombok/
+
+# Ignore local environment files
+demos/**/.env
+demos/**/.env.local
+demos/**/.env.development
+demos/**/.env.test
+demos/**/.env.production
+
+# Ignore IntelliJ build artifacts
+demos/**/out/
+
+# ==============================
+# 🔹 Frontend (React + VS Code)
+# ==============================
+
+# Ignore Node.js dependencies
+demos/**/node_modules/
+demos/**/npm-debug.log
+demos/**/yarn-error.log
+demos/**/pnpm-debug.log
+demos/**/package-lock.json
+demos/**/yarn.lock
+demos/**/pnpm-lock.yaml
+
+# Ignore VS Code settings and workspace files
+demos/**/.vscode/
+demos/**/*.code-workspace
+
+# Ignore React production build output
+demos/**/build/
+demos/**/dist/
+
+# Ignore ESLint, Jest, and coverage files
+demos/**/.eslintcache
+demos/**/jest/
+demos/**/coverage/
+demos/**/*.cache
+
+# Next.js specific (if applicable)
+demos/**/.next/
+demos/**/.vercel/
+demos/**/out/
+
+# Ignore React-specific environment variables
+demos/**/.env.local
+demos/**/.env.development.local
+demos/**/.env.test.local
+demos/**/.env.production.local
+
+# Ignore logs
+demos/**/*.log
+demos/**/logs/
+demos/**/debug.log
+demos/**/npm-debug.log
+
+# ==============================
+# 🔹 General Git Ignore
+# ==============================
+
+# Ignore OS-generated files
+.DS_Store
+Thumbs.db
+
+# Ignore archives, backups, and compressed files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.bak
+*.swp
+
+# Ignore deployment files
+*.pem
+*.crt
+*.key

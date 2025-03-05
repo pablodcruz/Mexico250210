@@ -66,6 +66,14 @@
             <version>5.2.0</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- BCrypt for password hashing -->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
+
     </dependencies>
 
     <!-- Maven has a default build config, but here we are able to tell it what java version to use -->
