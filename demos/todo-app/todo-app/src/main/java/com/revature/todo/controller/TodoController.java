@@ -52,7 +52,7 @@ public class TodoController {
      * Otherwise, returns all todos.  (optional approach)
      */
     public void getTodos(Context ctx) {
-        String userIdParam = ctx.queryParam("userId");
+        String userIdParam = ctx.pathParam("userId");
         if (userIdParam != null) {
             // Filter by user
             int userId = Integer.parseInt(userIdParam);

@@ -68,9 +68,8 @@ public class AuthController {
         }
 
         // If valid, start a session
-        HttpSession session = ctx.req().getSession(true);
+        HttpSession session = ctx.req().getSession();
         session.setAttribute("user", dbUser);
-        session.
 
         ctx.status(200).json(dbUser);
     }
@@ -80,7 +79,8 @@ public class AuthController {
      * Check if user is logged in
      */
     public static void checkLogin(Context ctx) {
-        HttpSession session = ctx.req().getSession(false);
+        HttpSession session = ctx.req().getSession();
+        User user = (User) session.getAttribute("user");
         if (session != null && session.getAttribute("user") != null) {
             User user = (User) session.getAttribute("user");
             ctx.status(200).json(user);
