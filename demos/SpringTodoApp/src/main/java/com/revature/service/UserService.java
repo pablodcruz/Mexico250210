@@ -1,7 +1,6 @@
-package com.revature.demo.service;
+package com.revature.service;
 
-import com.revature.demo.model.Users;
-import com.revature.demo.repo.UserRepository;
+import com.revature.repo.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

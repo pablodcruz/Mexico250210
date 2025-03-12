@@ -1,7 +1,6 @@
-package com.revature.demo.controller;
+package com.revature.controller;
 
-import com.revature.demo.model.Users;
-import com.revature.demo.service.UserService;
+import com.revature.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

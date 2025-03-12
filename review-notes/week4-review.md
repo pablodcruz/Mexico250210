@@ -82,6 +82,12 @@ Spring comes with two types of IoC containers:
 - **`@Qualifier`**: Identifies a bean by name for injection.
 - **`@Configuration`**: Declares a class for bean configuration.
 
+## Spring Stereotypes
+- **`@Component`**: A generic Spring-managed bean.
+- **`@Repository`**: Indicates a data access object (DAO) that interacts with the DB.
+- **`@Service`**: Indicates a service layer component.
+- **`@Controller`**, **`@RestController`**: Marks a controller component (for handling web requests).
+
 ## Spring Data
 Spring Data consolidates and simplifies database interactions, providing multiple options to integrate with various data sources.
 
@@ -90,10 +96,124 @@ Spring Data consolidates and simplifies database interactions, providing multipl
 - Provides ready-made classes and interfaces for straightforward DB operations.
 - Uses `application.yml` to specify the database connection details.
 
-### Spring JPA Repository Useful Annotations
-- **`@Entity`**: Maps a class to a database table.
-- **`@Id`**: Denotes the primary key field.
-- **`@OneToMany`, `@ManyToOne`, `@ManyToMany`**: Defines relationships and multiplicities in the DB schema.
+#### Spring JPA Repository Useful Annotations
+- **@Entity**: Maps a Java class to a database table.
+- **@Table**: Specifies the table name and, optionally, schema details.
+- **@Id**: Declares the primary key field of the entity.
+- **@GeneratedValue**: Configures how the primary key is generated (e.g., IDENTITY, SEQUENCE).
+- **@Column**: Customizes the mapping of a field to a database column (e.g., name, length, nullability).
+- **@OneToMany, @ManyToOne, @OneToOne, @ManyToMany**: Define relationships between entities.
+- **@JoinColumn**: Specifies the foreign key column for an association.
+- **@JoinTable**: Used with @ManyToMany to define the intermediary join table.
+- **@Transient**: Marks a field that should not be persisted in the database.
+- **@Embeddable** and **@Embedded**: Used to embed value objects into an entity.
+
+**Additional annotations (often Hibernate-specific):**
+
+- **@CreationTimestamp** and **@UpdateTimestamp**: Automatically populate timestamp fields for creation and updates.
+
+#### Entity Relationships:
+
+#### 1. One-to-One Relationship
+
+**Example:** A Person has one Passport.
+
+```java
+@Entity
+public class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+  
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "passport_id", referencedColumnName = "id")
+    private Passport passport;
+}
+
+@Entity
+public class Passport {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+  
+    @OneToOne(mappedBy = "passport")
+    private Person person;
+}
+```
+
+*Explanation:*  
+- **Person** is the owning side using `@JoinColumn` to hold the foreign key.
+- **Passport** is the inverse side, indicated by `mappedBy`.
+
+---
+
+#### 2. One-to-Many Relationship
+
+**Example:** A Department has many Employees.
+
+```java
+@Entity
+public class Department {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+  
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    private List<Employee> employees = new ArrayList<>();
+}
+
+@Entity
+public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+  
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+}
+```
+
+*Explanation:*  
+- **Department** is the inverse side with a collection of Employees.
+- **Employee** is the owning side with a foreign key (`department_id`) linking back to Department.
+
+---
+
+#### 3. Many-to-Many Relationship
+
+**Example:** Students and Courses, where a Student can enroll in many Courses and a Course can have many Students.
+
+```java
+@Entity
+public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+  
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "student_course",
+        joinColumns = @JoinColumn(name = "student_id"),
+        inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private Set<Course> courses = new HashSet<>();
+}
+
+@Entity
+public class Course {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+  
+    @ManyToMany(mappedBy = "courses")
+    private Set<Student> students = new HashSet<>();
+}
+```
+
+*Explanation:*  
+- The **Student** entity owns the relationship and defines a join table.
+- The **Course** entity is the inverse side using `mappedBy` to refer to the field in Student.
 
 ### What is an ORM?
 - Stands for Object-Relational Mapper.
@@ -107,12 +227,6 @@ Spring Data consolidates and simplifies database interactions, providing multipl
       - update: Updates the schema if necessary and doesn't drop existing tables
       - validate: Validates the schema but makes no changes
       - none: Disables DDL handling
-
-## Spring Stereotypes
-- **`@Component`**: A generic Spring-managed bean.
-- **`@Repository`**: Indicates a data access object (DAO) that interacts with the DB.
-- **`@Service`**: Indicates a service layer component.
-- **`@Controller`**, **`@RestController`**: Marks a controller component (for handling web requests).
 
 ## Spring Boot
 - Simplifies project setup and configuration.
