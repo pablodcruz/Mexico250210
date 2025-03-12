@@ -1,26 +1,16 @@
 package com.revature.service;
 
-import com.revature.repo.UserRepository;
+import com.revature.model.User;
+import com.revature.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
-@Service
-public class UserService {
-
-    private final UserRepository userRepository;
-
-
-    public UserService(UserRepository personRepository) {
-        this.userRepository = personRepository;
-    }
-
-    public List<Users> getAllPeople() {
-        return userRepository.findAll();
-    }
-
-    public Users saveUser(Users users) {
-
-        return userRepository.save(users);
-    }
+public interface UserService {
+    List<User> findAllUsers();
+    Optional<User> findUserById(Long id);
+    User createUser(User user);
+    Optional<User> updateUser(Long id, User user);
+    boolean deleteUser(Long id);
 }

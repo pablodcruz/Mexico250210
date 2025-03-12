@@ -16,7 +16,7 @@ public class TaskCategory {
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany
     private List<Task> tasks = new ArrayList<>();
 
     public Long getCategoryId() {

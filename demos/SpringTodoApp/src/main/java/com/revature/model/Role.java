@@ -1,5 +1,6 @@
 package com.revature.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -17,7 +18,9 @@ public class Role {
     @Column(name = "role_name", nullable = false, length = 50)
     private String roleName;
 
-    @OneToMany(mappedBy = "role")
+    // @JsonManagedReference will prevent an infinite loop when jackson serializes your response.
+    // This is the parent side of the relationship.
+    @OneToMany
     private List<User> users = new ArrayList<>();
 
     public Long getRoleId() {

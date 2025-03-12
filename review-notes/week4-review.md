@@ -143,7 +143,7 @@ public class Passport {
 
 *Explanation:*  
 - **Person** is the owning side using `@JoinColumn` to hold the foreign key.
-- **Passport** is the inverse side, indicated by `mappedBy`.
+- **Passport** is the inverse side, indicated by `mappedBy`. Avoid using `mappedBy` unless you have a need for bidirectional searches.
 
 ---
 

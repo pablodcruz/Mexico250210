@@ -1,57 +1,51 @@
 package com.revature.controller;
 
+import com.revature.model.User;
 import com.revature.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
-    UserService userService;
+    private final UserService userService;
 
-    public UserController(UserService userService){
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @PostMapping( value = "/register")
-    public ResponseEntity<Users> register(@RequestBody Users newUsers) {
-        // Logic to register a new user
-        Users savedUsers = userService.saveUser(newUsers);
-        return ResponseEntity.ok(savedUsers);
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(userService.findAllUsers());
     }
 
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Users login(@RequestBody Users loginRequest) {
-        // Logic to authenticate user login
-        return loginRequest;
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        return userService.findUserById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-    public ResponseEntity<Users> getUserProfile(@PathVariable Long userId) {
-        // Logic to retrieve user profile
-        return ResponseEntity.ok(new Users(userId, "Pablo", "password"));
-    }
-    @GetMapping("/hello")
-    public ResponseEntity<String> hello() {
-        String message = "Hello, World!";
-        return ResponseEntity.ok(message);
+    @PostMapping
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User savedUser = userService.createUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
 
-    @GetMapping("/error")
-    public ResponseEntity<String> error() {
-        String errorMessage = "Internal Server Error";
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(errorMessage);
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+        return userService.updateUser(id, userDetails)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-//    @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
-//    public @ResponseBody User updateUserProfile(@PathVariable Long userId, @RequestBody User updatedUser) {
-//        // Logic to update user profile
-//        return
-//    }
-
-    // Other handler methods for user operations...
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        boolean deleted = userService.deleteUser(id);
+        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    }
 }
