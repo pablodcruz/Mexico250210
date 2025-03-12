@@ -99,6 +99,14 @@ Spring Data consolidates and simplifies database interactions, providing multipl
 - Stands for Object-Relational Mapper.
 - Automates SQL generation, maps DB records to Java objects, and handles connections.
 - Spring Data primarily uses **Hibernate** as its ORM.
+- Hibernate Auto DDL (Development Only)
+   - The spring.jpa.hibernate.ddl-auto property controls Hibernate's schema generation behavior.
+   - The different possible values are:
+      - create: Drops and recreates the schema on each startup
+      - create-drop: Creates the schema on startup and drops it on shutdown
+      - update: Updates the schema if necessary and doesn't drop existing tables
+      - validate: Validates the schema but makes no changes
+      - none: Disables DDL handling
 
 ## Spring Stereotypes
 - **`@Component`**: A generic Spring-managed bean.

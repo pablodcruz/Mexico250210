@@ -1,0 +1,10 @@
+--INSERT INTO users (username, password_hash)
+--VALUES
+--  ('knight_arthur', 'HASHED_excalibur'),
+--  ('lady_gwen', 'HASHED_gauntlet');
+--
+--INSERT INTO todos (user_id, title, is_completed)
+--VALUES
+--  (1, 'Slay the dragon', false),
+--  (1, 'Polish armor', false),
+--  (2, 'Prepare feast', false);
