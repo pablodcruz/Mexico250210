@@ -94,7 +94,7 @@ Spring Data consolidates and simplifies database interactions, providing multipl
 ### Spring Data JPA
 - **JPA** (Java Persistence API) is a specification from Java EE 6; Spring made its own version.
 - Provides ready-made classes and interfaces for straightforward DB operations.
-- Uses `application.yml` to specify the database connection details.
+- Uses `application.yml` (or `application.properties`) to specify the database connection details.
 
 #### Spring JPA Repository Useful Annotations
 - **@Entity**: Maps a Java class to a database table.
@@ -112,9 +112,74 @@ Spring Data consolidates and simplifies database interactions, providing multipl
 
 - **@CreationTimestamp** and **@UpdateTimestamp**: Automatically populate timestamp fields for creation and updates.
 
+#### Handling Circular References with JSON Serialization (Wont be on QC or Quiz, but important for your project)
+
+Bidirectional relationships (e.g., between `Role` and `User`) can cause circular reference issues when serializing to JSON. One robust solution is to use **`@JsonIdentityInfo`**. This annotation assigns a unique identifier to each object, so that if an object is encountered again during serialization, Jackson uses its identifier rather than re-serializing the entire object.
+
+**Example Usage:**
+
+```java
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "roleId")
+@Entity
+@Table(name = "roles")
+public class Role {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "role_id")
+    private Long roleId;
+
+    @Column(name = "role_name", nullable = false, length = 50)
+    private String roleName;
+
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<User> users = new ArrayList<>();
+
+    // Getters and setters...
+}
+```
+
+```java
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId")
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    private Long userId;
+
+    @Column(name = "email", nullable = false, length = 100)
+    private String email;
+
+    @Column(name = "password", nullable = false, length = 100)
+    private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserProfile userProfile;
+
+    // Getters and setters...
+}
+```
+
+*Explanation:*
+- **@JsonIdentityInfo** is placed on both the `Role` and `User` entities.
+- **generator**: `ObjectIdGenerators.PropertyGenerator.class` tells Jackson to use a specific property as the unique identifier.
+- **property**: Specifies which property to use (e.g., `"roleId"` for `Role` and `"userId"` for `User`).
+- With this setup, when a `Role` object containing `User` objects is serialized, each `User` is assigned an identifier. If that `User` appears again (due to the bidirectional relationship), Jackson will output the identifier instead of re-serializing the full object graph, thereby avoiding infinite loops.
+
 #### Entity Relationships:
 
-#### 1. One-to-One Relationship
+##### 1. One-to-One Relationship
 
 **Example:** A Person has one Passport.
 
@@ -143,11 +208,9 @@ public class Passport {
 
 *Explanation:*  
 - **Person** is the owning side using `@JoinColumn` to hold the foreign key.
-- **Passport** is the inverse side, indicated by `mappedBy`. Avoid using `mappedBy` unless you have a need for bidirectional searches.
+- **Passport** is the inverse side, indicated by `mappedBy`.
 
----
-
-#### 2. One-to-Many Relationship
+##### 2. One-to-Many Relationship
 
 **Example:** A Department has many Employees.
 
@@ -178,9 +241,7 @@ public class Employee {
 - **Department** is the inverse side with a collection of Employees.
 - **Employee** is the owning side with a foreign key (`department_id`) linking back to Department.
 
----
-
-#### 3. Many-to-Many Relationship
+##### 3. Many-to-Many Relationship
 
 **Example:** Students and Courses, where a Student can enroll in many Courses and a Course can have many Students.
 
@@ -219,14 +280,14 @@ public class Course {
 - Stands for Object-Relational Mapper.
 - Automates SQL generation, maps DB records to Java objects, and handles connections.
 - Spring Data primarily uses **Hibernate** as its ORM.
-- Hibernate Auto DDL (Development Only)
-   - The spring.jpa.hibernate.ddl-auto property controls Hibernate's schema generation behavior.
-   - The different possible values are:
-      - create: Drops and recreates the schema on each startup
-      - create-drop: Creates the schema on startup and drops it on shutdown
-      - update: Updates the schema if necessary and doesn't drop existing tables
-      - validate: Validates the schema but makes no changes
-      - none: Disables DDL handling
+- **Hibernate Auto DDL (Development Only):**
+   - The `spring.jpa.hibernate.ddl-auto` property controls Hibernate's schema generation behavior.
+   - Possible values:
+      - **create**: Drops and recreates the schema on each startup.
+      - **create-drop**: Creates the schema on startup and drops it on shutdown.
+      - **update**: Updates the schema if necessary without dropping existing tables.
+      - **validate**: Validates the schema but makes no changes.
+      - **none**: Disables DDL handling.
 
 ## Spring Boot
 - Simplifies project setup and configuration.
@@ -252,9 +313,9 @@ Built around the **Model-View-Controller** pattern to handle web applications.
   - **`consumes`**: Specifies the expected input format (JSON, XML, etc.).
   - **`produces`**: Specifies the output format sent back to the client.
 - **`@RestController`**: Specialized controller for REST APIs.
-- **`@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping`**: Shortcut annotations for `@RequestMapping` for specific HTTP verbs.
+- **`@GetMapping`, @PostMapping, @PutMapping, @DeleteMapping`**: Shortcut annotations for `@RequestMapping` for specific HTTP verbs.
 - **`@PathVariable`**: Binds a URI template variable to a method parameter.
-- **`@ResponseBody`**: Indicates what the method returns is the response body.
+- **`@ResponseBody`**: Indicates that the method return value should be bound to the web response body.
 - **`@ResponseStatus`**: Specifies the HTTP status code that should be returned.
 - **`@ExceptionHandler`**: Sends custom responses when specific exceptions occur in a controller method.
 
@@ -262,11 +323,11 @@ Built around the **Model-View-Controller** pattern to handle web applications.
 Provides endpoints for monitoring and metrics:
 - **`/health`**: Shows application health info.
 - **`/beans`**: Lists available beans.
-- **Other**: `/env`, `/info`, `/logfile`, `/loggers`, `/mappings`, `/metrics`, etc.
+- **Other Endpoints:** `/env`, `/info`, `/logfile`, `/loggers`, `/mappings`, `/metrics`, etc.
 
 ## Spring Boot Profiles
 Allows environment-specific configurations (dev, test, prod). Use **`@Profile("envName")`** to map beans to a profile.
 
 ## Spring Boot DevTools
 - Disables caching to speed up development.
-- Enables automatic restarts for faster workflow.
+- Enables automatic restarts for a faster workflow.

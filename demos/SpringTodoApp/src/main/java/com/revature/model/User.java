@@ -1,11 +1,13 @@
 package com.revature.model;
 
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId")
 public class User {
 
     @Id
@@ -19,12 +21,16 @@ public class User {
     @Column(name = "password", nullable = false, length = 100)
     private String password;
 
+    // Mark the "role" field as the back reference to avoid circular serialization.
+//    @JsonBackReference(value = "roleUsers")
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
     @OneToOne(cascade = CascadeType.ALL)
     private UserProfile userProfile;
+
+    // Getters and setters
 
     public Long getUserId() {
         return userId;
@@ -64,5 +70,16 @@ public class User {
 
     public void setUserProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", userProfile=" + userProfile +
+                '}';
     }
 }

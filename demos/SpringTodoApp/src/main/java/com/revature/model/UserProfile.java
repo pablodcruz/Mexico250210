@@ -75,5 +75,17 @@ public class UserProfile {
     public void setDob(LocalDate dob) {
         this.dob = dob;
     }
+
+    @Override
+    public String toString() {
+        return "UserProfile{" +
+                "userProfileId=" + userProfileId +
+                ", user=" + user +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", dob=" + dob +
+                '}';
+    }
 }
 
