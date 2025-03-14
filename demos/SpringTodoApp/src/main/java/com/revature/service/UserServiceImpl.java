@@ -27,6 +27,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findUserById(Long id) {
         return userRepository.findById(id);
+//                .map(user -> {
+//                    User userToReturn = new User();
+//                   userToReturn.setUserId(user.getUserId());
+//                   userToReturn.setRole(user.getRole());
+//                    return userToReturn;
+//                });
     }
 
     @Override
@@ -40,6 +46,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    @Override
+    public Optional<User> validateUser(String email, String password) {
+        // For simplicity, we assume passwords are stored in plain text.
+        // In production, you'd use a PasswordEncoder to compare hashed passwords.
+        return userRepository.findByEmailAndPassword(email, password);
+    }
 
     @Override
     public Optional<User> updateUser(Long id, User userDetails) {

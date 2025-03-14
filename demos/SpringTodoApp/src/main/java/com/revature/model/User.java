@@ -21,13 +21,13 @@ public class User {
     @Column(name = "password", nullable = false, length = 100)
     private String password;
 
-    // Mark the "role" field as the back reference to avoid circular serialization.
+    // Mark the "role" field as the back reference to avoid circular serialization. Best to use JsonIdentityInfo
 //    @JsonBackReference(value = "roleUsers")
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserProfile userProfile;
 
     // Getters and setters

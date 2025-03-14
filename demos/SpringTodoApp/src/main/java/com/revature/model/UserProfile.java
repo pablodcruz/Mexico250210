@@ -2,9 +2,12 @@ package com.revature.model;
 
 import java.time.LocalDate;
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "user_profiles")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userProfileId")
 public class UserProfile {
 
     @Id
@@ -12,8 +15,10 @@ public class UserProfile {
     @Column(name = "user_profile_id")
     private Long userProfileId;
 
+    // Remove cascade all if you are adding profiles after.
+    // Removing cascade on the user field ensures that saving a UserProfile does not trigger an attempt to persist a new User.
     @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
     @Column(name = "first_name", length = 50)
@@ -53,6 +58,7 @@ public class UserProfile {
     }
 
     public String getLastName() {
+        System.out.println(this.lastName);
         return lastName;
     }
 

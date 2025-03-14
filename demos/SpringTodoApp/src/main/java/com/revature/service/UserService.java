@@ -13,4 +13,6 @@ public interface UserService {
     User createUser(User user);
     Optional<User> updateUser(Long id, User user);
     boolean deleteUser(Long id);
+
+    Optional<User> validateUser(String email, String password);
 }
