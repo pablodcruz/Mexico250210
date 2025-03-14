@@ -34,7 +34,6 @@ public class UserServiceImpl implements UserService {
 //                    return userToReturn;
 //                });
     }
-
     @Override
     public User createUser(User user) {
         System.out.println("===============================================================================");
@@ -49,7 +48,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> validateUser(String email, String password) {
         // For simplicity, we assume passwords are stored in plain text.
-        // In production, you'd use a PasswordEncoder to compare hashed passwords.
+        // In production, you'd use a PasswordEncoder/BCrypt to compare hashed passwords.
         return userRepository.findByEmailAndPassword(email, password);
     }
 

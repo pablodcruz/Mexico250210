@@ -107,16 +107,17 @@ Spring Data consolidates and simplifies database interactions, providing multipl
 - **@JoinTable**: Used with @ManyToMany to define the intermediary join table.
 - **@Transient**: Marks a field that should not be persisted in the database.
 - **@Embeddable** and **@Embedded**: Used to embed value objects into an entity.
+- **@Query**: Allows defining custom JPQL or native SQL queries.
 
-**Additional annotations (often Hibernate-specific):**
+**Additional Key Points**:
+- Spring Data supports **derived query methods**, e.g. `findByName`, `findByUsername`, etc.
+- Spring Data requires an underlying ORM (often Hibernate). It generates the boilerplate for standard DB interactions.
+- **Transaction Management** is typically handled with `@Transactional`, often placed on service methods.
+- **Propagation** levels such as `REQUIRED`, `NEVER`, etc., control how nested transactions behave.
 
-- **@CreationTimestamp** and **@UpdateTimestamp**: Automatically populate timestamp fields for creation and updates.
-
-#### Handling Circular References with JSON Serialization (Wont be on QC or Quiz, but important for your project)
+#### Handling Circular References with JSON Serialization (Won't be on QC or Quiz, but important for your project)
 
 Bidirectional relationships (e.g., between `Role` and `User`) can cause circular reference issues when serializing to JSON. One robust solution is to use **`@JsonIdentityInfo`**. This annotation assigns a unique identifier to each object, so that if an object is encountered again during serialization, Jackson uses its identifier rather than re-serializing the entire object.
-
-**Example Usage:**
 
 ```java
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -294,11 +295,33 @@ public class Course {
 - Eliminates most boilerplate and XML configurations.
 - Provides enterprise-ready features out of the box.
 - Relies on the Spring Framework under the hood.
+- Typical packaging: `jar` or `war`.
+- Embeds a default **Tomcat** server (can switch to Jetty or Undertow).
+
+### Spring Boot Actuator
+Provides endpoints for monitoring and metrics:
+- **`/health`**: Shows application health info.
+- **`/beans`**: Lists available beans.
+- **Other Endpoints:** `/env`, `/info`, `/logfile`, `/loggers`, `/mappings`, `/metrics`, etc.
+- Endpoints can be **enabled/disabled** individually in configuration.
+- You can create **custom Actuator endpoints** by annotating a class with `@Endpoint` and using `@ReadOperation` / `@WriteOperation`.
+
+### Spring Boot Profiles
+Allows environment-specific configurations (dev, test, prod). Use **`@Profile("envName")`** to map beans to a profile.
+
+### Spring Boot DevTools
+- Disables caching to speed up development.
+- Enables automatic restarts for a faster workflow (distinct from Actuator features).
+
+### ResponseEntity
+- Provides a **flexible** way to construct HTTP responses (status code, headers, body).
+- Commonly used in REST controllers, e.g. `ResponseEntity.ok(...)` or `ResponseEntity.status(HttpStatus.CREATED).body(...)`.
 
 ## Transactional Propagation
 Used with the **`@Transactional`** annotation:
-- **Propagation.REQUIRED**: Creates a new transaction if none exists.
-- **Propagation.NEVER**: Does not run in a transaction and throws an exception if one is already active.
+- **Propagation.REQUIRED**: Creates a new transaction if none exists, else joins existing.
+- **Propagation.NEVER**: Throws an exception if a transaction is active.
+- (Also includes others like `REQUIRES_NEW`, `SUPPORTS`, `MANDATORY`, etc.)
 
 ## Spring MVC
 Built around the **Model-View-Controller** pattern to handle web applications.
@@ -313,21 +336,46 @@ Built around the **Model-View-Controller** pattern to handle web applications.
   - **`consumes`**: Specifies the expected input format (JSON, XML, etc.).
   - **`produces`**: Specifies the output format sent back to the client.
 - **`@RestController`**: Specialized controller for REST APIs.
-- **`@GetMapping`, @PostMapping, @PutMapping, @DeleteMapping`**: Shortcut annotations for `@RequestMapping` for specific HTTP verbs.
+- **`@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping`**: Shortcut annotations for `@RequestMapping` for specific HTTP verbs.
 - **`@PathVariable`**: Binds a URI template variable to a method parameter.
 - **`@ResponseBody`**: Indicates that the method return value should be bound to the web response body.
 - **`@ResponseStatus`**: Specifies the HTTP status code that should be returned.
 - **`@ExceptionHandler`**: Sends custom responses when specific exceptions occur in a controller method.
 
-## Spring Boot Actuator
-Provides endpoints for monitoring and metrics:
-- **`/health`**: Shows application health info.
-- **`/beans`**: Lists available beans.
-- **Other Endpoints:** `/env`, `/info`, `/logfile`, `/loggers`, `/mappings`, `/metrics`, etc.
+### Additional Spring MVC Notes
+- **Request Lifecycle**: DispatcherServlet -> HandlerMapping -> Controller -> Return -> DispatcherServlet -> Response.
+- **Validation**: Use Bean Validation (JSR-380) with `@Valid` for request DTOs.
+- **Exception Handling**: `@ControllerAdvice` or method-level `@ExceptionHandler`.
 
-## Spring Boot Profiles
-Allows environment-specific configurations (dev, test, prod). Use **`@Profile("envName")`** to map beans to a profile.
+### Dependency Injection Types
+- **Constructor Injection**: Recommended for mandatory dependencies (more testable, ensures object is fully initialized).
+- **Setter Injection**: Good for optional dependencies.
+- **Field Injection**: Quick, but not as testable or flexible.
 
-## Spring Boot DevTools
-- Disables caching to speed up development.
-- Enables automatic restarts for a faster workflow.
+### Handling Bean Ambiguity
+- Use `@Qualifier` or `@Primary` to resolve conflicts if multiple beans match the same type.
+
+### Packaging & Deployment
+- Spring Boot apps typically package as a **jar** with embedded server or a **war** for deployment on an external container.
+
+### XML Code for Setter Injection
+For older XML-based configurations, **setter injection** often uses the `<property>` element:
+```xml
+<bean id="myBean" class="com.example.MyBean">
+    <property name="someDependency" ref="someOtherBean"/>
+</bean>
+```
+- **`name`** is the name of the property to set.
+- **`ref`** references another bean by ID.
+
+### Spring Data Class Hierarchy
+In Spring Data, the commonly used repository interfaces form a hierarchy:
+1. **Repository** (marker interface)
+2. **CrudRepository** (extends Repository)
+3. **PagingAndSortingRepository** (extends CrudRepository)
+4. **JpaRepository** (extends PagingAndSortingRepository)
+
+**Note**: Some repository interfaces in Spring Data might not appear in the standard hierarchy (e.g., `ReactiveCrudRepository`), but the above are typical for JPA usage.
+
+### Where to Place `@Transactional`
+- Commonly on service-layer methods, as that’s where business logic and DB interactions occur.
