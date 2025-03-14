@@ -26,11 +26,11 @@ public class AuthController {
     }
     // Login endpoint: Validate credentials and store the authenticated user in the session.
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User loginRequest, HttpSession session) {
+    public ResponseEntity<String> login(@RequestBody User loginRequest, HttpSession session) {
         Optional<User> userOpt = userService.validateUser(loginRequest.getEmail(), loginRequest.getPassword());
         if (userOpt.isPresent()) {
             session.setAttribute("user", userOpt.get());
-            return ResponseEntity.ok("Logged in successfully");
+            return ResponseEntity.ok(userOpt.toString());
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }

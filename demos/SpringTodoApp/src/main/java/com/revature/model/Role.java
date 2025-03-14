@@ -1,5 +1,6 @@
 package com.revature.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -21,7 +22,7 @@ public class Role {
 
     // Mark the collection as the "managed" side of the bidirectional relationship.
     // mappedBy tells JPA that the "role" field in User owns the relationship.
-//    @JsonManagedReference(value = "roleUsers")
+    @JsonIgnore // Avoid lazy loading. Jackson will avoid serialzing this
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<User> users = new ArrayList<>();
 

@@ -77,9 +77,10 @@ public class User {
         return "User{" +
                 "userId=" + userId +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                ", userProfile=" + userProfile +
+                // Only print role id instead of full Role object
+                ", roleId=" + (role != null ? role.getRoleId() : null) +
+                // Avoid printing userProfile to prevent circular reference
                 '}';
     }
+
 }

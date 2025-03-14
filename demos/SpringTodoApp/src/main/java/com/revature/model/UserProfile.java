@@ -1,6 +1,8 @@
 package com.revature.model;
 
 import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -37,8 +39,12 @@ public class UserProfile {
     @Column(name = "dob")
     private LocalDate dob;
 
-    // NEW: One-to-many relationship with Task. Cascade removal ensures that when a user profile is deleted,
+    // One-to-many relationship with Task. Cascade removal ensures that when a user profile is deleted,
     // all tasks associated with it are automatically removed.
+    // Using @JsonIgnore prevents Jackson from serializing this lazy collection.
+    // If you have an endpoint that must return tasks along with the profile, consider using a DTO to manually load and include tasks,
+    // or configure that relationship to be eagerly fetched only for that use case.
+    @JsonIgnore
     @OneToMany(mappedBy = "userProfile", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Task> tasks = new ArrayList<>();
 
