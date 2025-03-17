@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+    <h2>Using Fetch to grab a pokemon and displaying it!</h2>
+
+    <div class="mb-3" style="margin-left: 1rem; margin-right:50%;">
+        <label>Pokemon Name</label>
+        <input id="pokename" class="form-control">
+    </div>
+    <button style="margin-left: 1rem;" class="btn btn-primary" onclick="getPokemon()">Submit</button>
+
+    <h3>Result</h3>
+    <div id="result">
+
+    </div>
+</body>
+
+<script src="pokeservice.js"></script>
+</html>

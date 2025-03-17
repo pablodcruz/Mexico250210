@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        
+        <p id="changeme">Please change me to whatever you want!</p>
+        <button onclick="clickEventListener()">Change to Aidan Shafer</button>
+
+        <button onclick="addAidenClickListener()">Click me to add more Aidan Shafer</button>
+        <ul id="addmore">
+
+        </ul>
+
+        <button onclick="displayTheChild()">Show me the nodes</button>
+        <ol id = "ol">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+            <li>Item 5</li>
+        </ol>
+
+
+        <h3>Bubbling Event</h3>
+        <div style="border: 2px solid red;" onclick="alert('div was clicked')">
+            div element
+            <p style="border: 2px solid darkblue;" onclick="alert('paragraph was clicked')">
+                paragraph element
+                <span style="border: 2px solid darkorange" onclick="alert('span was clicked')">span element</span>
+            </p>
+        </div>
+
+        <h3>Capturing Event</h3>
+        <div id="divCapture" style="border: 2px solid red;">
+            div element
+            <p style="border: 2px solid darkblue;">
+                paragraph element
+                <span style="border: 2px solid darkorange">span element</span>
+            </p>
+        </div>
+    </body>
+
+    <script>
+        // This is another way to add JS into your HTML using script tag
+        // Usually put on the very bottom inside your HTML element
+        // Anything in the script tag will execute the moment the HTML is loaded by the browser
+        console.log("Hello World");
+
+        //Attaching onclick event to div, p and span and changing the default behavior to capturing instead
+        let div = document.querySelector("#divCapture");
+
+        //First param, what event should it listen to?
+        //Second param, give me a function that should be execute if this event happened
+        //Third param, do you want a capturing behavior?
+        div.addEventListener("click", () => {alert("div was clicked")},true);
+
+        div.childNodes[1].addEventListener("click", () => {alert("p was clicked")}, true);
+
+        div.childNodes[1].childNodes[1].addEventListener("click", ()=>{alert("span was clicked")}, true);
+
+        function clickEventListener() {
+            console.log("Button has been clicked!");
+
+            //DOM Manipulation
+            //Idea: We want to change the paragraph content into Aiden Shafer
+
+            //Selecting the element to change it
+            // let paragEle = document.querySelector("#changeme");
+
+            let paragEle = document.getElementById("changeme"); //Another way to select an element using getElementBy...
+
+            //Changing content to Aidan Shafer
+            paragEle.innerHTML = "Aiden Shafer";
+        }
+
+        function addAidenClickListener() {
+
+            let unorderedList = document.querySelector("#addmore");
+
+            //We have to create the object version of what we want to add
+            let list = document.createElement("li");
+
+            list.innerHTML = "Aidan Shafer";
+
+            //Append is used to 
+            unorderedList.append(list);
+
+            //There is also a way to remove elements
+            //You select element, removeChild()
+        }
+
+        function displayTheChild() {
+            //DOM Trasversing
+            
+            let orderList = document.querySelector("#ol");
+
+            console.log(orderList.childNodes);
+            console.log(orderList.parentNode);
+
+            //Selecting Item 3 using DOM trasversal
+            console.log(orderList.childNodes[5].innerHTML);
+
+            //Another way of selecting Item 3 but using a more programatical approach
+            orderList.childNodes.forEach(element => {
+                if (element.innerHTML == "Item 3") {
+                    console.log("Item has been found!");
+                    console.log(element.innerHTML);
+                }
+            })
+        }
+    </script>
+</html>

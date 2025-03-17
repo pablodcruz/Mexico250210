@@ -30,6 +30,7 @@ public class AuthController {
         Optional<User> userOpt = userService.validateUser(loginRequest.getEmail(), loginRequest.getPassword());
         if (userOpt.isPresent()) {
             session.setAttribute("user", userOpt.get());
+            System.out.println(userOpt.get().getEmail());
             return ResponseEntity.ok(userOpt.toString());
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");

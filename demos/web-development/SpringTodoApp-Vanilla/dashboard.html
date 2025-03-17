@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Spring Todo App</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Optional external stylesheet -->
+</head>
+<body>
+  <h2>Dashboard</h2>
+  <p id="welcomeMessage">Welcome to your dashboard!</p>
+  
+  <!-- Task Form: Allows the user to add a new task -->
+  <form id="taskForm">
+    <input type="text" id="taskTitle" placeholder="Task Title" required>
+    <input type="text" id="taskDescription" placeholder="Task Description" required>
+    <input type="date" id="taskDueDate" required>
+    <button type="submit">Add Task</button>
+  </form>
+  
+  <!-- Area to display the list of tasks -->
+  <ul id="taskList"></ul>
+  
+  <!-- Area to display a motivational quote (if returned from the backend) -->
+  <p class="quote" id="quote"></p>
+  
+  <!-- Logout button -->
+  <button id="logoutButton">Logout</button>
+  
+  <!-- Link the external JavaScript file -->
+  <script src="app.js"></script>
+  <!-- Dashboard-specific script -->
+  <script>
+    // Load tasks when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      loadTasks();
+    });
+    
+    // Attach event listener to the task form
+    document.getElementById('taskForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      addTask();
+    });
+    
+    // Attach event listener to the logout button
+    document.getElementById('logoutButton').addEventListener('click', function() {
+      logout();
+    });
+  </script>
+</body>
+</html>

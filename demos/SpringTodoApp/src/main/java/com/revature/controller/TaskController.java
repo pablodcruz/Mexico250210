@@ -58,6 +58,7 @@ public class TaskController {
             // If no user is logged in, return 401 Unauthorized.
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not logged in");
         }
+        System.out.println(sessionUser.getEmail());
         // Associate the new task with the logged-in user's profile.
         task.setUserProfile(sessionUser.getUserProfile());
         // Save the task via the service layer.
