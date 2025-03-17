@@ -28,7 +28,7 @@ IoC is a concept (design principle), while DI is a design pattern that implement
 ## Spring IoC Container
 This container is responsible for instantiating, managing, and assembling objects. Any object created and managed by the IoC container is called a **Spring Bean**. You can configure these beans in various ways to tailor their behavior.
 
-![How IoC Container Works](IoC-Container.png)
+![How IoC Container Works](./images/IoC-Container.png)
 
 ## ApplicationContext vs BeanFactory
 Spring comes with two types of IoC containers:
@@ -327,7 +327,7 @@ Used with the **`@Transactional`** annotation:
 Built around the **Model-View-Controller** pattern to handle web applications.
 
 ### Spring MVC Architecture:
-![Spring MVC Architecture](Spring-MVC-Architecture.png)
+![Spring MVC Architecture](./images/Spring-MVC-Architecture.png)
 
 ### Spring MVC Annotations
 - **`@RequestMapping`**: Used to expose a resource or data from the DB via a web endpoint.
