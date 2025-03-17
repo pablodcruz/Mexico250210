@@ -1,0 +1,115 @@
+/* --- Global Reset and Base Styles --- */
+/* Remove default margins/paddings and set a consistent box model */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Set a modern, clean font and a light background */
+  body {
+    font-family: 'Roboto', sans-serif;  /* A popular, modern font */
+    background: #f0f2f5;                 /* A light gray background for a soft look */
+    color: #333;                        /* Dark text for readability */
+    padding: 20px;
+  }
+  
+  /* --- Container Styling --- */
+  /* Use a central container to wrap content and give it a card-like appearance */
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  /* --- Header and Title Styles --- */
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #444;
+  }
+  
+  /* --- Form Styling --- */
+  /* Make forms display in a column layout with spacing */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;  /* Space between input fields */
+  }
+  
+  /* Style text inputs for a modern look */
+  input[type="email"],
+  input[type="password"],
+  input[type="text"],
+  input[type="date"] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+  
+  /* Change border color when an input is focused */
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="text"]:focus,
+  input[type="date"]:focus {
+    outline: none;
+    border-color: #007bff; /* Blue border on focus */
+  }
+  
+  /* --- Button Styling --- */
+  /* Style buttons to be bold and modern */
+  button {
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    background: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  /* Darken the button when hovered */
+  button:hover {
+    background: #0056b3;
+  }
+  
+  /* --- Message and Error Styling --- */
+  /* Centered message for feedback */
+  .message {
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  /* Error messages in red */
+  .error {
+    color: red;
+  }
+  
+  /* --- Dashboard Specific Styles --- */
+  /* Styling for task list */
+  #taskList {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  
+  /* Each task appears as a separated card-like item */
+  #taskList li {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  /* Style for displaying motivational quotes */
+  .quote {
+    margin-top: 20px;
+    text-align: center;
+    font-style: italic;
+    color: #555;
+  }
+  

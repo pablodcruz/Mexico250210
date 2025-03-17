@@ -3,29 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <title>Register - Spring Todo App</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Optional external stylesheet -->
+  <!-- Link to the external CSS file for modern styling -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h2>Register</h2>
   <!-- Registration Form -->
   <form id="registerForm">
+    <!-- Email input -->
     <input type="email" id="regEmail" placeholder="Email" required>
+    <!-- Password input -->
     <input type="password" id="regPassword" placeholder="Password" required>
     <!-- Hidden input for roleId; here "2" represents a regular user -->
     <input type="hidden" id="regRoleId" value="2">
     <button type="submit">Register</button>
   </form>
+  <!-- Paragraph to display registration messages (success or error) -->
   <p id="registerMessage"></p>
+  <!-- Link to the login page -->
   <p>Already have an account? <a href="login.html">Login here</a></p>
 
-  <!-- Link the external JavaScript file -->
+  <!-- Load the common JavaScript file -->
   <script src="app.js"></script>
-  <!-- Register page-specific script -->
+  <!-- Inline script to attach the event listener for registration -->
   <script>
-    // Attach event listener to the registration form
+    // When the registration form is submitted, prevent default submission
+    // and call the registerUser() function defined in app.js.
     document.getElementById('registerForm').addEventListener('submit', function(e) {
-      e.preventDefault(); // Prevent the form from refreshing the page
-      registerUser();     // Call the function from app.js to handle registration
+      e.preventDefault();
+      registerUser();
     });
   </script>
 </body>

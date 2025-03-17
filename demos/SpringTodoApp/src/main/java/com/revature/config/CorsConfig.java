@@ -8,19 +8,22 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CorsConfig {
 
-    // This configuration allows all origins using allowedOriginPatterns and
-    // enables credentials to be included in requests.
+    // This bean configures global CORS settings.
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
+                // Apply CORS configuration to all endpoints
                 registry.addMapping("/**")
-//                        .allowedOriginPatterns("*") // allows any origin dynamically when credentials are used
-                        .allowedOriginPatterns("http://127.0.0.1:5500") // Use the exact origin your front-end is served from
+                        // Specify allowed origins. Replace with your front-end's URL.
+                        .allowedOriginPatterns("http://127.0.0.1:5500")
+                        // Allow specific HTTP methods
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        // Allow all headers
                         .allowedHeaders("*")
-                        .allowCredentials(true);    // enable credentials
+                        // Allow credentials (cookies, authorization headers, etc.)
+                        .allowCredentials(true);
             }
         };
     }

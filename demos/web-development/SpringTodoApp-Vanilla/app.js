@@ -1,5 +1,5 @@
 // Base URL of the backend API
-const API_BASE_URL = 'https://localhost:8080';
+const API_BASE_URL = 'http://localhost:8080';
 
 // Function to register a new user
 function registerUser() {

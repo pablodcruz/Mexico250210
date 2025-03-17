@@ -3,27 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <title>Login - Spring Todo App</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Optional external stylesheet -->
+  <!-- Link to the external CSS file for modern styling -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h2>Login</h2>
   <!-- Login Form -->
   <form id="loginForm">
+    <!-- Email input -->
     <input type="email" id="loginEmail" placeholder="Email" required>
+    <!-- Password input -->
     <input type="password" id="loginPassword" placeholder="Password" required>
     <button type="submit">Login</button>
   </form>
+  <!-- Paragraph to display login messages -->
   <p id="loginMessage"></p>
+  <!-- Link to the registration page -->
   <p>Don't have an account? <a href="register.html">Register here</a></p>
 
-  <!-- Link the external JavaScript file -->
+  <!-- Load the common JavaScript file -->
   <script src="app.js"></script>
-  <!-- Login page-specific script -->
+  <!-- Inline script to attach the event listener for login -->
   <script>
-    // Attach event listener to the login form
+    // When the login form is submitted, prevent the default behavior
+    // and call the loginUser() function defined in app.js.
     document.getElementById('loginForm').addEventListener('submit', function(e) {
-      e.preventDefault(); // Prevent the default form submission
-      loginUser();        // Call the function from app.js to handle login
+      e.preventDefault();
+      loginUser();
     });
   </script>
 </body>
