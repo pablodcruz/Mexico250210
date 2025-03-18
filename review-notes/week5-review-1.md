@@ -318,9 +318,6 @@ JS was designed in a very short amount of time (10 days), which means there are 
 ### Default Parameters in JS
 <img src="./images/default-parameters.png" alt="Default Parameters in JS" width="60%">
 
-
-
-
 ## Fetch API
 - **Definition:**  
   A way to interact with a RESTful API. It fetches resources across the network using the HTTP protocol and returns a response object in the form of a promise.
