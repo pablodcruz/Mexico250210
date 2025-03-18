@@ -64,7 +64,7 @@ Cascading is in the name because that is the algorithm it uses to apply styling 
 
 ## Box Model
 
-![Box Model](css-box-model.png)
+![Box Model](./images/css-box-model.png)
 
 ### Margin
 - Outermost layer
