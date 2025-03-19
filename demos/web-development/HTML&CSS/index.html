@@ -63,10 +63,10 @@
                 fr unit is used for grid to have a relative size on each column
                 the higher the number the more weighted that column will have
             */
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, 4fr);
             grid-template-rows: repeat(2, 1fr); /* Grid rows are optional, css grid will add new rows if there are too many elements per each column*/
             
-            gap: 25px;
+            gap: 55px;
         }
 
         /* 
@@ -81,10 +81,17 @@
             grid-column: span 2;
         }
     </style>
+
+    <style>
+        #h5{
+            color: brown;
+        }
+    </style>
 </head>
 
 <!-- Body tag contains all the content this html should display in your browser -->
 <body>
+    <h5 id="h5" > H5 Header</h5>
     
     <!-- Heading tag is used to display titles or subtitles (h1 to h6) -->
     <h1>Introduction to HTML</h1>
@@ -218,6 +225,7 @@
         <div class="box box-fourth">4</div>
         <div class="box box-fourth">5</div>
     </div>
+    <p>Animations</p>
 </body>
 
 </html>

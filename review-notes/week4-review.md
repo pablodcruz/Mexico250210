@@ -112,6 +112,9 @@ Spring Data consolidates and simplifies database interactions, providing multipl
 **Additional Key Points**:
 - Spring Data supports **derived query methods**, e.g. `findByName`, `findByUsername`, etc.
 - Spring Data requires an underlying ORM (often Hibernate). It generates the boilerplate for standard DB interactions.
+- **Property Expressions**: Refer to the chaining of properties within method names.
+    - These expressions form the `findBy`, `readBy`, `getBy`, and `queryBy` parts in method names defined in the Spring Data JPA repository interfaces.
+    - Property expression could match more than one property (e.g., when the properties have the same name but are in different nested paths). Spring Data JPA provides a `@Param` annotation to disambiguate in these cases.
 - **Transaction Management** is typically handled with `@Transactional`, often placed on service methods.
 - **Propagation** levels such as `REQUIRED`, `NEVER`, etc., control how nested transactions behave.
 
@@ -346,6 +349,7 @@ Built around the **Model-View-Controller** pattern to handle web applications.
 - **Request Lifecycle**: DispatcherServlet -> HandlerMapping -> Controller -> Return -> DispatcherServlet -> Response.
 - **Validation**: Use Bean Validation (JSR-380) with `@Valid` for request DTOs.
 - **Exception Handling**: `@ControllerAdvice` or method-level `@ExceptionHandler`.
+- **Rest Template**: Used to create applications that consume RESTful Web Services. You can use the exchange() method to consume the web services for all HTTP methods.
 
 ### Dependency Injection Types
 - **Constructor Injection**: Recommended for mandatory dependencies (more testable, ensures object is fully initialized).

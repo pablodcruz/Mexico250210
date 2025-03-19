@@ -20,6 +20,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+//    @RequestMapping(value = "register", method = RequestMethod.POST)
     public ResponseEntity<User> register(@RequestBody User user) {
         User newUser = userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
@@ -27,6 +28,7 @@ public class AuthController {
     // Login endpoint: Validate credentials and store the authenticated user in the session.
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User loginRequest, HttpSession session) {
+        System.out.println("helloS");
         Optional<User> userOpt = userService.validateUser(loginRequest.getEmail(), loginRequest.getPassword());
         if (userOpt.isPresent()) {
             session.setAttribute("user", userOpt.get());
