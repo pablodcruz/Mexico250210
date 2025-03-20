@@ -21,7 +21,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAllUsers() {
-        userRepository.find
         return userRepository.findAll();
     }
 
@@ -35,6 +34,7 @@ public class UserServiceImpl implements UserService {
 //                    return userToReturn;
 //                });
     }
+    
     @Override
     public User createUser(User user) {
         System.out.println("===============================================================================");

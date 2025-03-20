@@ -324,7 +324,8 @@ Allows environment-specific configurations (dev, test, prod). Use **`@Profile("e
 Used with the **`@Transactional`** annotation:
 - **Propagation.REQUIRED**: Creates a new transaction if none exists, else joins existing.
 - **Propagation.NEVER**: Throws an exception if a transaction is active.
-- (Also includes others like `REQUIRES_NEW`, `SUPPORTS`, `MANDATORY`, etc.)
+- **Propagation.REQUIRES_NEW**:Create a new transaction, and suspend the current transaction if one exists.
+- **Propagation.MANDATORY**: Support a current transaction, throw an exception if none exists.
 
 ## Spring MVC
 Built around the **Model-View-Controller** pattern to handle web applications.
