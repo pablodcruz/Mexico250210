@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 export const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -29,7 +28,6 @@ export const LoginPage = () => {
       <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
       <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" type="password" />
       <button onClick={handleLogin}>Login</button>
-      <p>{message}</p>
     </div>
   );
 };

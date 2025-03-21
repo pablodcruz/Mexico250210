@@ -1,170 +1,160 @@
-// // Base URL of the backend API
-// const API_BASE_URL = 'http://localhost:8080';
-
-// // Function to register a new user
-// function registerUser() {
-//   // Retrieve values from the registration form
-//   const email = document.getElementById('regEmail').value;
-//   const password = document.getElementById('regPassword').value;
-//   const roleId = document.getElementById('regRoleId').value;
-
-//   // Create a user object according to the expected JSON format
-//   const user = {
-//     email: email,
-//     password: password,
-//     role: { roleId: roleId },
-    
-//   };
-
-//  // Send a POST request to the register endpoint
-//   fetch(`${API_BASE_URL}/api/auth/register`, {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(user)
-//   }) 
-//     .then(response => {
-//       if (!response.ok) {
-//         throw new Error('Registration failed');
-//       }
-//       return response.json();
-//     })
-//     .then(data => {
-//       // Inform the user of a successful registration
-      
-//       document.getElementById('registerMessage').textContent = 'Registration successful! You can now log in.';
-//     })
-//     .catch(error => {
-//       document.getElementById('registerMessage').textContent = error.message;
-//     });
-// }
-
-// // Function to login a user
-// function loginUser() {
-//   // Retrieve login form values
-//   const email = document.getElementById('loginEmail').value;
-//   const password = document.getElementById('loginPassword').value;
-
-//   // Create a login object; note we only need email and password here
-//   const user = { email: email, password: password };
-
-//   // Send a POST request to the login endpoint
-//   fetch(`${API_BASE_URL}/api/auth/login`, {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(user),
-//     credentials: 'include' // Include session cookies for session-based authentication
-//   })
-//     .then(response => {
-//       if (!response.ok) {
-//         throw new Error('Login failed');
-//       }
-//       // Assuming a successful login returns a simple text message
-//       return response.text();
-//     })
-//     .then(data => {
-//       // Redirect the user to the dashboard upon successful login
-//       window.location.href = 'dashboard.html';
-//     })
-//     .catch(error => {
-//       document.getElementById('loginMessage').textContent = error.message;
-//     });
-// }
-
-// // Function to load tasks from the backend and display them on the dashboard
-// function loadTasks() {
-//   fetch(`${API_BASE_URL}/api/tasks`, {
-//     method: 'GET',
-//     credentials: 'include'
-//   })
-//     .then(response => {
-//       if (!response.ok) {
-//         throw new Error('Failed to load tasks');
-//       }
-//       return response.json();
-//     })
-//     .then(data => {
-//       const taskList = document.getElementById('taskList');
-//       taskList.innerHTML = ''; // Clear any existing tasks
-
-//       // Check if the data returned is an array or an object (if a new task returns a TaskResponseDto)
-//       if (Array.isArray(data)) {
-//         data.forEach(task => {
-//           const li = document.createElement('li');
-//           li.textContent = `${task.title} - ${task.description}`;
-//           taskList.appendChild(li);
-//         });
-//       } else {
-//         // When adding a new task, the response may be a TaskResponseDto
-//         const li = document.createElement('li');
-//         li.textContent = `${data.task.title} - ${data.task.description}`;
-//         taskList.appendChild(li);
-//         // Display the motivational quote if provided
-//         if (data.motivationalQuote) {
-//           document.getElementById('quote').textContent = data.motivationalQuote;
-//         }
-//       }
-//     })
-//     .catch(error => {
-//       console.error('Error loading tasks:', error);
-//     });
-// }
-
-// // Function to add a new task
-// function addTask() {
-//   // Retrieve values from the task form
-//   const title = document.getElementById('taskTitle').value;
-//   const description = document.getElementById('taskDescription').value;
-//   const dueDate = document.getElementById('taskDueDate').value;
-  
-//   // Create a task object according to the expected JSON format
-//   // Here, we assume categoryId=1 and taskStatusId=1 for simplicity
-//   const task = {
-//     category: { categoryId: 1 },
-//     taskStatus: { taskStatusId: 1 },
-//     title: title,
-//     description: description,
-//     dueDate: dueDate,
-//     creationDate: new Date().toISOString()
-//   };
-
-//   // Send a POST request to the create task endpoint
-//   fetch(`${API_BASE_URL}/api/tasks`, {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(task),
-//     credentials: 'include' // Include session cookies for authentication
-//   })
-//     .then(response => {
-//       if (!response.ok) {
-//         throw new Error('Failed to add task');
-//       }
-//       return response.json();
-//     })
-//     .then(data => {
-//       // Clear the task form after a successful submission
-//       document.getElementById('taskForm').reset();
-//       // Reload tasks to include the new one and display the motivational quote (if any)
-//       loadTasks();
-//     })
-//     .catch(error => {
-//       console.error('Error adding task:', error);
-//     });
-// }
-
-// // Function to logout the user by calling the logout endpoint
-// function logout() {
-//   fetch(`${API_BASE_URL}/api/auth/logout`, {
-//     method: 'POST',
-//     credentials: 'include'
-//   })
-//     .then(response => {
-//       if (!response.ok) {
-//         throw new Error('Logout failed');
-//       }
-//       // Redirect the user to the login page after logging out
-//       window.location.href = 'login.html';
-//     })
-//     .catch(error => {
-//       console.error('Error during logout:', error);
-//     });
-// }
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+const API_BASE_URL = 'http://localhost:8080';
+// Helper to safely get input values
+function getInputValue(id) {
+    var _a;
+    const input = document.getElementById(id);
+    return (_a = input === null || input === void 0 ? void 0 : input.value) !== null && _a !== void 0 ? _a : '';
+}
+// Register user
+function registerUser() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const email = getInputValue('regEmail');
+        const password = getInputValue('regPassword');
+        const roleId = parseInt(getInputValue('regRoleId'));
+        const user = {
+            email,
+            password,
+            role: { roleId }
+        };
+        try {
+            const response = yield fetch(`${API_BASE_URL}/api/auth/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(user)
+            });
+            if (!response.ok)
+                throw new Error('Registration failed');
+            const msg = document.getElementById('registerMessage');
+            if (msg)
+                msg.textContent = 'Registration successful! You can now log in.';
+        }
+        catch (error) {
+            const msg = document.getElementById('registerMessage');
+            if (msg)
+                msg.textContent = error.message;
+        }
+    });
+}
+// Login user
+function loginUser() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const email = getInputValue('loginEmail');
+        const password = getInputValue('loginPassword');
+        const user = { email, password };
+        try {
+            const response = yield fetch(`${API_BASE_URL}/api/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(user),
+                credentials: 'include'
+            });
+            if (!response.ok)
+                throw new Error('Login failed');
+            yield response.text();
+            window.location.href = 'dashboard.html';
+        }
+        catch (error) {
+            const msg = document.getElementById('loginMessage');
+            if (msg)
+                msg.textContent = error.message;
+        }
+    });
+}
+// Load tasks
+function loadTasks() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield fetch(`${API_BASE_URL}/api/tasks`, {
+                method: 'GET',
+                credentials: 'include'
+            });
+            if (!response.ok)
+                throw new Error('Failed to load tasks');
+            const data = yield response.json();
+            const taskList = document.getElementById('taskList');
+            if (!taskList)
+                return;
+            taskList.innerHTML = '';
+            if (Array.isArray(data)) {
+                for (const task of data) {
+                    const li = document.createElement('li');
+                    li.textContent = `${task.title} - ${task.description}`;
+                    taskList.appendChild(li);
+                }
+            }
+            else {
+                const li = document.createElement('li');
+                li.textContent = `${data.task.title} - ${data.task.description}`;
+                taskList.appendChild(li);
+                if (data.motivationalQuote) {
+                    const quoteEl = document.getElementById('quote');
+                    if (quoteEl)
+                        quoteEl.textContent = data.motivationalQuote;
+                }
+            }
+        }
+        catch (error) {
+            console.error('Error loading tasks:', error);
+        }
+    });
+}
+// Add a new task
+function addTask() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const title = getInputValue('taskTitle');
+        const description = getInputValue('taskDescription');
+        const dueDate = getInputValue('taskDueDate');
+        const task = {
+            category: { categoryId: 1 },
+            taskStatus: { taskStatusId: 1 },
+            title,
+            description,
+            dueDate,
+            creationDate: new Date().toISOString()
+        };
+        try {
+            const response = yield fetch(`${API_BASE_URL}/api/tasks`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(task),
+                credentials: 'include'
+            });
+            if (!response.ok)
+                throw new Error('Failed to add task');
+            const form = document.getElementById('taskForm');
+            if (form)
+                form.reset();
+            yield loadTasks();
+        }
+        catch (error) {
+            console.error('Error adding task:', error);
+        }
+    });
+}
+// Logout
+function logout() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield fetch(`${API_BASE_URL}/api/auth/logout`, {
+                method: 'POST',
+                credentials: 'include'
+            });
+            if (!response.ok)
+                throw new Error('Logout failed');
+            window.location.href = 'login.html';
+        }
+        catch (error) {
+            console.error('Error during logout:', error);
+        }
+    });
+}
