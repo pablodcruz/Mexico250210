@@ -1,25 +1,17 @@
-import { useState } from 'react';
-import { loginUser } from '../services/authService';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext';
 
 
 export const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useContext(AuthContext)!; // ! is the non-null assertion operator, basically telling typescript we know this wont be null, so dont worry about it. 
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    try {
-      const response = await loginUser({ email, password });
-      if (!response.ok) throw new Error('Login failed');
-      navigate('/dashboard');
-    } catch (error: unknown) {
-        if (error instanceof Error) {
-            console.error(error.message);
-          } else {
-          console.error('Unknown error occurred');
-        }
-    }
+    await login(email, password);
+    navigate('/dashboard');  
   };
 
   return (
