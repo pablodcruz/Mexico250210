@@ -11,8 +11,7 @@ npm install
 ## 2. Install Additional Packages
 
 ```bash
-npm install react-router-dom
-npm install --save-dev @types/react-router-dom
+npm install --save-dev react-router-dom
 ```
 
 ---

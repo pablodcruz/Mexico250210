@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -27,15 +28,15 @@ public class AuthController {
     }
     // Login endpoint: Validate credentials and store the authenticated user in the session.
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User loginRequest, HttpSession session) {
+    public ResponseEntity<User> login(@RequestBody User loginRequest, HttpSession session) {
         System.out.println("helloS");
         Optional<User> userOpt = userService.validateUser(loginRequest.getEmail(), loginRequest.getPassword());
         if (userOpt.isPresent()) {
             session.setAttribute("user", userOpt.get());
             System.out.println(userOpt.get().getEmail());
-            return ResponseEntity.ok(userOpt.toString());
+            return ResponseEntity.ok(userOpt.get());
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+            return ResponseEntity.notFound().build();
         }
     }
 

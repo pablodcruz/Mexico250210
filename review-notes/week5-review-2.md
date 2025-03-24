@@ -1,6 +1,6 @@
 # Node.js
 * It is a free and open-source JavaScript interpreter that allows us to run JS outside of a web browser
-* Platform independent 
+* Platform independent
     * It can run on any OS you utilize
 * Uses Google's chrome V8 engine
 
@@ -278,7 +278,7 @@ Now `text` is shared between both components, controlled by the parent.
 * Whenever you use that component, you must provide the necesary information as well (UNLESS IT IS OPTIONAL!)
 * A very big part of React to make components reusable
 
-## State vs Props 
+## State vs Props
 
 ## Virtual DOM
 * Whenever we interact with the "DOM" in React using React specific things such as hooks or jsx, we are actually messing with a virtual DOM

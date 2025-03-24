@@ -15,7 +15,7 @@ export const DashboardPage = () => {
 
   // Access user from our AuthContext
   const auth = useContext(AuthContext);
-  const user = auth?.user; // user may be null if not logged in
+  const user = auth?.user; // ? marks it as optional since user may be null if not logged in
 
   const fetchTasks = async () => {
     try {
@@ -42,6 +42,7 @@ export const DashboardPage = () => {
       taskStatus: { taskStatusId: 1 },
     };
     await addTask(task);
+    // clean the ui after adding the task:
     setTitle('');
     setDescription('');
     setDueDate('');
@@ -54,7 +55,11 @@ export const DashboardPage = () => {
   };
 
   useEffect(() => {
-    fetchTasks();
+    if(user){
+      fetchTasks();
+    } else {
+      navigate('/')
+    }
   }, []);
 
   return (

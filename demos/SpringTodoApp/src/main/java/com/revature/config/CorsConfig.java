@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+// Browsers implemented the Cross-Origin Resource Sharing (CORS) policy to enhance security by controlling which origins
+// (domains) can access resources from a different origin, preventing malicious websites from accessing sensitive data or
+// resources from other sites. This means we need to specify whos allowed to consume our API.
 @Configuration
 public class CorsConfig {
 
