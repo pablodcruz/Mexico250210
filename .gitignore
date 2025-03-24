@@ -52,6 +52,7 @@ demos/**/out/
 
 # Ignore Node.js dependencies
 demos/**/node_modules/
+**/node_modules/
 demos/**/npm-debug.log
 demos/**/yarn-error.log
 demos/**/pnpm-debug.log

@@ -91,15 +91,6 @@
 * Depending on which you pick, the syntax will look different on how you apply certain features in React
     * Ex: Doing props in function component looks very different class component
 
-## Props
-* Props are a great way to pass information into a component to be used/displayed
-    * Essentially passing from **parent to child** component
-    * You can pass from child to parent using callback functions
-        * https://www.pluralsight.com/guides/react-communicating-between-components
-* You specify props within the parameter of the function component
-* Whenever you use that component, you must provide the necesary information as well (UNLESS IT IS OPTIONAL!)
-* A very big part of React to make components reusable
-
 ## Component Lifecycle
 * Like with anything, a component have a lifespan. It will live and it will die. In coding, this means we have the power to control a component life (messed up I know). 
 * All seriousness this means, if a component dies, do this behavior or run a function or do whatever you want
@@ -119,10 +110,175 @@
     * With class components it took more boilerplate code to do it
 * TLDR, if you have a dynamically changing information in your webpage use **HOOKS** or else they will **NOT** display the changes
 
+## React Hooks examples
+
+### 🔹 `useState`
+Manages local state in a functional component.
+
+```tsx
+import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  return <button onClick={() => setCount(count + 1)}>Clicked {count}</button>;
+}
+```
+
+---
+
+### 🔹 `useEffect`
+Performs side effects like fetching data or syncing with external systems.
+
+```tsx
+import { useEffect, useState } from 'react';
+
+function Quote() {
+  const [quote, setQuote] = useState('');
+
+  useEffect(() => {
+    fetch('/api/quote')
+      .then(res => res.json())
+      .then(data => setQuote(data.text));
+  }, []); // Run once on mount, provide state to run on state change
+
+  return <p>{quote}</p>;
+}
+```
+
+---
+
+### 🔹 `useContext`
+Lets you read and subscribe to the value of a React Context.
+
+It’s used when you want to share data globally (like user info, theme, or language) across many components without manually passing props through every component layer.
+
+---
+
+## Managing Logged-in User Data (Authentication Context)**
+
+### Why?
+When a user logs in, you often want to:
+- Show their **name or avatar** in the navbar
+- Use their **auth token** to make API calls
+- Conditionally render pages/components based on their **role or login status**
+- Allow them to **log out from anywhere**
+
+### 📦 `useContext` lets you:
+- Store the user data in **one place**
+- Access it from **any component**, without prop-drilling
+
+---
+
+### 🧪 Example: AuthContext
+
+```tsx
+// AuthContext.tsx
+import { createContext, useContext, useState } from 'react';
+
+const AuthContext = createContext(null);
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
+  const login = (userData) => setUser(userData);
+  const logout = () => setUser(null);
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+// Custom hook for easy access
+export const useAuth = () => useContext(AuthContext);
+```
+
+```tsx
+// App.tsx
+<AuthProvider>
+  <Navbar />
+  <Dashboard />
+</AuthProvider>
+```
+
+```tsx
+// Navbar.tsx
+import { useAuth } from './AuthContext';
+
+function Navbar() {
+  const { user, logout } = useAuth();
+
+  return (
+    <div>
+      {user ? (
+        <>
+          <span>Welcome, {user.name}</span>
+          <button onClick={logout}>Logout</button>
+        </>
+      ) : (
+        <span>Not logged in</span>
+      )}
+    </div>
+  );
+}
+```
+
+---
+
+## Other Common Use Cases for `useContext`
+
+| Use Case         | Example Description                         |
+|------------------|---------------------------------------------|
+| ✅ Theme toggling | Share a light/dark mode value app-wide      |
+| ✅ Language switcher | Provide selected language (i18n) globally |
+| ✅ Shopping cart | Store cart items in context for a store app |
+| ✅ Modal or toast visibility | Toggle global UI components        |
+
+---
+
+## Lifting State (with Example)
+
+Lifting state **up** means moving shared state to the **common parent**.
+
+```tsx
+function Parent() {
+  const [text, setText] = useState('');
+
+  return (
+    <>
+      <InputComponent onInputChange={setText} />
+      <DisplayComponent text={text} />
+    </>
+  );
+}
+
+function InputComponent({ onInputChange }) {
+  return <input onChange={e => onInputChange(e.target.value)} />;
+}
+
+function DisplayComponent({ text }) {
+  return <p>{text}</p>;
+}
+```
+
+Now `text` is shared between both components, controlled by the parent.
+
 ## States
 * While props are used to transfer information into the component to use
 * States are used within the component to re-render your web page with dynamically changing variables/information
 * States are **immutable**, you must use the useState method to change the information and have it reflect
+
+## Props
+* Props are a great way to pass information into a component to be used/displayed
+    * Essentially passing from **parent to child** component
+    * You can pass from child to parent using callback functions
+        * https://www.pluralsight.com/guides/react-communicating-between-components
+* You specify props within the parameter of the function component
+* Whenever you use that component, you must provide the necesary information as well (UNLESS IT IS OPTIONAL!)
+* A very big part of React to make components reusable
+
+## State vs Props 
 
 ## Virtual DOM
 * Whenever we interact with the "DOM" in React using React specific things such as hooks or jsx, we are actually messing with a virtual DOM
@@ -176,39 +332,3 @@
     * You can think of it as having singleton variable for all the child components
 * Child to Parent communication is needed for lifting states
 * **You must put the state to the common ancestry of all the child components (Their parent basically)**
-
-# React Redux
-* A library that changes the game with state management
-* Essentially, this is important if you plan on having a universal state that you need to share across multiple components everywhere
-    * Ex: User credentials - Chances are most (if not all) will require some sort of user information to do their functionalities correctly
-* It makes single point of access of all of your states
-    * Kinda like one client-side database for your app
-    * Your components will have access to it and have all the capabilities to change its information as well
-    * All other components listening to the same state will also have the reflected change
-* To install `npm install @reduxjs/toolkit react-redux`
-
-## How Redux manages States
-![Redux State Management](https://github.com/220725-JavaReact/trainer-code/blob/main/Week-8/React/img/Diagram.PNG)
-
-## Redux Store
-* The centralized place for all of your state information needs
-* The Redux Store is immutable and an important facts and the main reason why Redux Reducers exists
-* The states are still **immutable**!
-
-## Redux Reducers
-* They are an extra step process in which you specify how should Redux change the value of the state
-* They take in the current state and redux action as arguments
-
-## Redux Action
-* An object that contains `payload` that has all the information we are using to change the state stored in the store in some shape of form
-* They call it "action" because every time you sent information from the view that is usually done by doing some sort of action within the view (like clicking a button)
-
-## Redux Selectors
-* It is like the Redux version of React useState hook
-* Meaning it will grab the latest information stored in the store
-* In the event that information changes, it will re-render your website accordingly like useState hook
-* One cool thing, you don't need to have a setter method unlike useState because we have dispatchers/actions to do it for us
-
-## React State Slices
-* All in one place that will hold your reducers and actions
-* It is like taking a slice of your Redux Store

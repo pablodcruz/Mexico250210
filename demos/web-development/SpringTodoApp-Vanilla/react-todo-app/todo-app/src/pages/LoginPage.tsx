@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { loginUser } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,8 +15,8 @@ export const LoginPage = () => {
       navigate('/dashboard');
     } catch (error: unknown) {
         if (error instanceof Error) {
-          console.error(error.message);
-        } else {
+            console.error(error.message);
+          } else {
           console.error('Unknown error occurred');
         }
     }

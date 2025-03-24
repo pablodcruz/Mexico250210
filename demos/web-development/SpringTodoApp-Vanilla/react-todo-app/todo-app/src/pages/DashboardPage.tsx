@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Task } from '../models/Task';
 import { addTask, getTasks } from '../services/taskService';
 import { logoutUser } from '../services/authService';

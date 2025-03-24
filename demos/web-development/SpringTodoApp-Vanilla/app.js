@@ -158,3 +158,10 @@ function logout() {
         }
     });
 }
+ogging out
+//       window.location.href = 'login.html';
+//     })
+//     .catch(error => {
+//       console.error('Error during logout:', error);
+//     });
+// }

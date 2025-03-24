@@ -25,7 +25,7 @@ As a team of 5, Refactor the existing Loan Management System into a modern, full
 
 - **Testing & Logging:**
   - **Testing:**  
-    - Continue to implement unit tests (using JUnit 5) for your service layer.  
+    - Continue to implement unit tests (using JUnit 5) for your service layer. Implement at least 10 unit tests.
     - (Optional) Consider adding integration tests for your Spring MVC endpoints.
   - **Logging:**  
     - Configure Logback to log significant events and errors in the application.

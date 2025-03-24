@@ -115,6 +115,13 @@ Spring Data consolidates and simplifies database interactions, providing multipl
 - **Property Expressions**: Refer to the chaining of properties within method names.
     - These expressions form the `findBy`, `readBy`, `getBy`, and `queryBy` parts in method names defined in the Spring Data JPA repository interfaces.
     - Property expression could match more than one property (e.g., when the properties have the same name but are in different nested paths). Spring Data JPA provides a `@Param` annotation to disambiguate in these cases.
+    - The following finds users by country `And` street address:
+    ```java
+        @Repository
+        public interface UserRepository extends CrudRepository<User, Long> {
+            List<User> findByAddress_Country_AndAddress_StreetAddress(String country, String streetAddress);
+        }
+    ```
 - **Transaction Management** is typically handled with `@Transactional`, often placed on service methods.
 - **Propagation** levels such as `REQUIRED`, `NEVER`, etc., control how nested transactions behave.
 
