@@ -17,7 +17,7 @@ function getInputValue(id) {
 }
 // Register user
 function registerUser() {
-    return __awaiter(this, void 0, void 0, function* () {
+          return __awaiter(this, void 0, void 0, function* () {
         const email = getInputValue('regEmail');
         const password = getInputValue('regPassword');
         const roleId = parseInt(getInputValue('regRoleId'));

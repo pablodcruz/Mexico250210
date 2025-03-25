@@ -40,7 +40,7 @@
 * It is a frontend Javascript library to develop websites
     * Notice it is just a library, hence we will need to add more and more dependencies to utilize other functionalities provided by other libraries
 * It is **Single Page Application**
-    *  Allows us to navigate through different web pages in our website without reloading the entire page
+    * Allows us to navigate through different web pages in our website without reloading the entire page
         * (When you did servlets, you noticed how everytime you enter a new page, it is completely blank and takes a while until you finally see something)
     * You only have one HTML page and you utilize JS heavily to dynamically change your website to **appear** like you went to a different page
     * Advantages:
@@ -75,6 +75,21 @@
 * TLDR: you make components to reuse them in your website and they are a tiny piece of your app that makes up a whole page
 * Class Component - They are components made by creating a class and extending React.Component
 * Function Component - They are components made by creating a function
+
+## Controlled and Uncontrolled Components
+* Controlled components are tightly coupled with React's state management.
+* Any changes to the component's state are reflected immediately in the component's UI.
+* Uncontrolled components maintain their state independently of React's state management.
+* They do not rely on React to synchronize state changes with the UI.
+
+## High Order Components
+* High order components are functions that take a component and return a new component.
+* The traditional component model transforms props into a portion of the UI.
+* High order components take a component as a parameter and transforms it, returning a new component with added functionality.
+* The idea is based on the idea of a high-order function in JavaScript, where a function is taken as an argument, and another function is returned.
+
+## Nested Components
+* Nested components refer to components that are used within other components, enabling a modular and structured approach to building React applications.
 
 ## JSX
 * An extension of JavaScript.
@@ -237,6 +252,15 @@ function Navbar() {
 
 ---
 
+### 🔹 `useRef`
+In React.js, a ref is essentially a reference to a DOM element or an instance of a component. Refs provide us with an API to access and modify DOM elements without using props, states, etc. 
+
+The useRef is used for creating a ref in React Functional Components (RFCs). Its usage is similar to that of any other hook in React, in that we simply call the hook and it returns the ref.
+
+```tsx
+const ref = useRef();
+```
+ 
 ## Lifting State (with Example)
 
 Lifting state **up** means moving shared state to the **common parent**.
@@ -267,7 +291,8 @@ Now `text` is shared between both components, controlled by the parent.
 ## States
 * While props are used to transfer information into the component to use
 * States are used within the component to re-render your web page with dynamically changing variables/information
-* States are **immutable**, you must use the useState method to change the information and have it reflect
+* States are **immutable**, you must use the `useState` method to change the information and have it reflect
+  - **Immutability** - mutating state directly can lead to components which are buggy or difficult to optimize. Always use the lifecycle hooks like `useState`
 
 ## Props
 * Props are a great way to pass information into a component to be used/displayed
@@ -279,6 +304,30 @@ Now `text` is shared between both components, controlled by the parent.
 * A very big part of React to make components reusable
 
 ## State vs Props
+* State enables components to hold and update their data.(`useState`)
+* Props facilitate communication between parent and child components
+* This allows for the creation of reusable and composable UI elements.
+
+### Using State
+* Refer to hooks `useState`
+
+### Passing Props
+To pass props to a child component, you simply include them as attributes when rendering the child component. Here’s an example:
+
+  ```jsx
+  function ParentComponent() {
+  const greeting = “Hello, React!”;
+  return <ChildComponent message={greeting} />;
+  }
+
+  function ChildComponent(props) {
+  return <p>{props.message}</p>;
+  }
+  ```
+
+## Rendering Elements on the DOM
+* With traditional JavaScript and HTML, we need a base HTML file and we may have elements we can dynamically create using JavaScript. 
+* This rendering process still holds true for React.
 
 ## Virtual DOM
 * Whenever we interact with the "DOM" in React using React specific things such as hooks or jsx, we are actually messing with a virtual DOM
@@ -297,14 +346,36 @@ Now `text` is shared between both components, controlled by the parent.
 * It is massive optimization hit if you don't add keys when you map things in React
 * Just another point as to why we add unique identifiers in pretty much everything in our database
 
-# React Routing
+## Events in React
+* Handling events is syntactically similar to handling events with inline HTML. 
+* When using JSX, however, event names use camelCase, rather than lowercase, and the event handler is passed in as a JavaScript reference rather than just a string.
+
+  ```tsx
+  const MyButton = () => {
+    const doSomething = () => {
+      // event functionality
+    };
+
+    return <button onClick={doSomething}>Click me to do the thing!</button>;
+  };
+  ```
+
+* In HTML, the equivalent would be:
+
+  ```html
+  <button onclick="doSomething()">
+    Click me to do the thing!
+  </button>
+  ```
+
+## React Routing
 * A React library that allows us to switch between components as if we were switching pages in your traditional routing in HTML
 * Good idea to establish the routing component in index.tsx, our main entry point for our components
 * It is an extra dependency, we have to mess with our NPM once again
     * `npm install react-router-dom@6`
 * Documentation: https://reactrouter.com/en/main
 
-# Axios
+## Axios
 * A way to communcate with an external API or your very own
 * It is more abstracted form of using your normal AJAX in vanilla JS
     * It uses XMLHTTPRequest at the back
@@ -315,13 +386,13 @@ Now `text` is shared between both components, controlled by the parent.
 * Protection over XSRF (Cross Site Request Forgery)
 * Easy way to make a progress bar
 
-## useEffect Hook
+## useEffect Hook (cont)
 * To fully utilize grabbing information through the network (via API) you need to use this hook
 * Essentially, it will run that function whenever an "update" gets detected by React
 * It will also run when you first initializes your component (probably the most use case o fit)
 * One of those "updates", whenever the DOM changes
 
-# React State Management
+## React State Management
 * React will pass state information from one component to another.
 * The two component must be related to each other (child to parent relationship)
 * You can bubble up the state information using a bunch of callback functions

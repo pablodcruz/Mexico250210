@@ -100,12 +100,13 @@ export const DashboardPage = () => {
 
       <h3>Tasks</h3>
       <ul>
+        {/* React uses keys to identify elements that have changed, so it can optimally re-render only updated elements, we should use the items id we have stored in the db */}
         {tasks.map((task, i) => (
           <li key={i}>
             {task.title} - {task.description}
           </li>
         ))}
-      </ul>
+         </ul>
     </div>
   );
 };
