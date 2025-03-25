@@ -11,6 +11,8 @@ export const DashboardPage = () => {
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [quote, setQuote] = useState('');
+  const { checkSession } = useContext(AuthContext)!; // ! is the non-null assertion operator, basically telling typescript we know this wont be null, so dont worry about it. 
+
   const navigate = useNavigate();
 
   // Access user from our AuthContext
@@ -55,11 +57,16 @@ export const DashboardPage = () => {
   };
 
   useEffect(() => {
-    if(user){
-      fetchTasks();
-    } else {
-      navigate('/')
-    }
+    const validateSession = async () => {
+      const isValid = await checkSession();
+      if (isValid) {
+        console.log("Session valid");
+      } else {
+        navigate("/");
+      }
+    };
+ 
+    validateSession(); 
   }, []);
 
   return (

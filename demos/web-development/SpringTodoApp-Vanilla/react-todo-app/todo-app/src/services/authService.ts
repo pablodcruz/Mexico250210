@@ -25,3 +25,10 @@ export const logoutUser = async () => {
     credentials: 'include'
   });
 };
+
+export const checkUserSession = async () =>
+  fetch(`${API_BASE_URL}/api/auth/session-check`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+});

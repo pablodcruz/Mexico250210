@@ -38,6 +38,15 @@ public class AuthController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/session-check")public ResponseEntity<?> checkSession(HttpSession session) {
+        User loggedUser = (User) session.getAttribute("user");
+        if (loggedUser != null) {
+            return ResponseEntity.ok(loggedUser); // Return user details if logged in
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Session invalid or expired");
+        }
+    }
+
 
     // Logout endpoint: Invalidate the session to log the user out.
     @PostMapping("/logout")
