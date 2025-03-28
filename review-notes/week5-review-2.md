@@ -14,6 +14,13 @@
 * It suppose object-oriented programming (a bit better)
 * It is a **superset** of JavaScript
     * All this means that Typescript has everything JavaScript has but it has more methods/tools (Ex: you have access modifiers, you have interfaces, etc.)
+    ```ts
+    interface User {
+      email: string;
+      password: string;
+      role?: Role;
+    }
+    ```
 * It is strictly typed
     * Probably one of the best things about TS
 

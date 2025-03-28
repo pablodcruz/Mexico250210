@@ -3,7 +3,7 @@ export interface Task {
     description: string;
     dueDate: string;
     creationDate: string;
-        category: { categoryId: number };
+    category: { categoryId: number };
     taskStatus: { taskStatusId: number };
   }
   

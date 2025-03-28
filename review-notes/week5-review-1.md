@@ -28,6 +28,9 @@ Current version of HTML 5
 - Usually changes its behavior in some shape or form
 - **Example:** An image element uses the `src` attribute to find the location of the image you want to display
 
+### HTML Comments
+ - You use `<!-- -->`
+
 # Introduction to CSS
 
 **Cascading Style Sheets**  
@@ -39,15 +42,18 @@ Cascading is in the name because that is the algorithm it uses to apply styling 
 ### Internal CSS
 - Applies CSS by using the `<style>` tag (usually in the `<head>` tag)
 - Used to apply multiple CSS rules within the same HTML document
+- midium priority.
 
 ### Inline CSS
 - Applies CSS by using the `style` attribute on an HTML element
 - Used to apply CSS rules to one specific HTML element
+- highest priority
 
 ### External CSS
 - Applies CSS by creating an external `.css` file and applying CSS rules across multiple HTML documents
 - You can reference external CSS using the `<link>` element
 - Used to apply CSS rules to multiple HTML documents
+- lowest priority
 
 ## CSS Selectors
 
@@ -340,6 +346,10 @@ JS was designed in a very short amount of time (10 days), which means there are 
   Is needed to use `await`, but an async function doesn't necessarily need to use `await` to work.
 
 ## More JavaScript
+
+### Template literals
+ - Template Strings use back-ticks (``) rather than the quotes ("") to define a string.
+ - Template String provide an easy way to interpolate variables and expressions into strings.
 
 ### Spread Operator
 - **Functionality:**  
