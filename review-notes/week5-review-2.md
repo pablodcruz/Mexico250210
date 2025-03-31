@@ -33,6 +33,12 @@
 * Any
 * Tuple
 * Enums
+  ```ts
+  enum Directions { 
+    Up: "Up", 
+    Down: "Down"
+    }
+  ```
 * Never - Used for error handling
     * If you are interested, essentially if you place this with a function/method, it means that this function will never return anything. Void still returns "no value" while Never will never return anything.
     * So mainly used for error exceptions since that will end the program and not "complete" the function completely or in more rare cases, you want a function that will never end

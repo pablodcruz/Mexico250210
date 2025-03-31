@@ -348,9 +348,12 @@ JS was designed in a very short amount of time (10 days), which means there are 
 ## More JavaScript
 
 ### Template literals
- - Template Strings use back-ticks (``) rather than the quotes ("") to define a string.
  - Template String provide an easy way to interpolate variables and expressions into strings.
-
+ - Template Strings use back-ticks (``) rather than the quotes ("") to define a string.
+  ```ts
+  `string text ${expression} string text`
+  ```
+  
 ### Spread Operator
 - **Functionality:**  
   It will spread an array or string into its individual elements.

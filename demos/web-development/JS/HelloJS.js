@@ -1,6 +1,7 @@
 //=========================Feel Free to comment out sections of this demo to better follow in the console==========================
 //print to console
 console.log("Hello World");
+myFunc(a);
 
 //global scope
 //loosely typed
@@ -12,7 +13,6 @@ a = "hello";
 a = {b: "I am an object", c:true};
 
 console.log(a);
-
 
 //Block Scope
 
@@ -26,11 +26,9 @@ for (let index = 0; index <3; index++) {
 // console.log(b) //gives and error since its out of scope
 console.log(c)
 
-
 //Check for undefined using typeof
 let und;
 console.log(typeof und); //undefined
-
 
 //Arrays
 console.log("Arrays-------");
@@ -78,7 +76,7 @@ console.log("This is a string concat to a number " + 123);
 
 function coercionTest(input1, input2){
     console.log("Coersion Test---");
-    console.log("input 1 is " + input1 + " with type of "+(typeof input1));
+    console.log("input 1 is " + input1 + " with type of " + (typeof input1));
     console.log("input 2 is " + input2 + " with type of "+(typeof input2));
     console.log("Coercion shows them as " + ((input1 == input2)?"its the same":"its different"));
 }
