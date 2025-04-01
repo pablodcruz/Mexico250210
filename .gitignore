@@ -7,6 +7,7 @@ demos/**/target/
 demos/**/.mvn/
 demos/**/mvnw
 demos/**/mvnw.cmd
+demos/SpringTodoApp/src/main/resources/application.properties
 
 # Ignore IntelliJ project files
 demos/**/.idea/

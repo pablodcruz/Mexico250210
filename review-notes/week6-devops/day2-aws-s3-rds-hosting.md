@@ -94,6 +94,7 @@
 3. **Transfer the Spring Boot JAR** or clone your repo:
    ```bash
    scp -i "MyKeyPair.pem" target/social-media-app.jar ec2-user@<EC2-Public-IP>:/home/ec2-user
+   scp -i "spring-todo-kp.pem" C:/Users/PabloDeLaCruz/Documents/Notes/ISM/Mexico250210/demos/SpringTodoApp/target/SpringTodoApp-0.0.1-SNAPSHOT.jar ec2-user@<EC2-Public-IP>:/home/ec2-user
    # OR clone your GitHub repo directly:
    git clone https://github.com/<username>/<repo>.git
    ```
