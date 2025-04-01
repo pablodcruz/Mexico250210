@@ -4,7 +4,7 @@
  * We create a context (AuthContext) and a provider (AuthProvider).
  */
 
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 import { checkUserSession, loginUser } from '../services/authService';
 import { User } from '../models/User';
 

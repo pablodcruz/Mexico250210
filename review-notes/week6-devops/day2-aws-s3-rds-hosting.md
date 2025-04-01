@@ -163,6 +163,21 @@ For a simpler and cost-effective setup, you can host your **React** frontend as 
      aws s3 sync build/ s3://my-react-app-bucket --acl public-read
      ```
    - Make sure your files are **publicly accessible** if you want anyone to visit without signing in (can configure bucket policies or object permissions).
+   - Bucket policy template:
+   ```json
+   {
+   "Version": "2012-10-17",
+   "Statement": [
+      {
+         "Sid": "PublicReadGetObject",
+         "Effect": "Allow",
+         "Principal": "*",
+         "Action": "s3:GetObject",
+         "Resource": "arn:aws:s3:::YOUR_BUCKET_NAME_HERE/*"
+      }
+   ]
+   }
+   ```
 
 5. **Access Your React App**:
    - Find the **Endpoint** under **Static website hosting** (e.g., `http://my-react-app-bucket.s3-website-us-east-1.amazonaws.com`).

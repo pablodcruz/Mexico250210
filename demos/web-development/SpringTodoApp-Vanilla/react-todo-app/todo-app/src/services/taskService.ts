@@ -1,6 +1,6 @@
 import { Task } from "../models/Task";
 
-const API_BASE_URL = 'http://localhost:8080';
+const API_BASE_URL = 'http://107.23.178.208:8080';
 
 export const getTasks = async () => {
   return fetch(`${API_BASE_URL}/api/tasks`, {
