@@ -1,44 +1,5 @@
 # Docker
 
-## Table of Contents
-
-1. [What is Docker](#what-is-docker)
-2. [Containerization](#containerization)
-3. [Containers](#containers)
-   - [Benefits](#benefits)
-   - [Pros and Cons](#pros-and-cons)
-4. [Containers vs. Virtual Machines](#containers-vs-virtual-machines)
-   - [Virtual Machines](#virtual-machines)
-   - [Pros and Cons](#pros-and-cons-1)
-5. [Docker Architecture](#docker-architecture)
-   - [Components](#components)
-6. [Docker Objects](#docker-objects)
-   - [Images](#images)
-   - [Containers](#containers-1)
-7. [Typical Flow](#typical-flow)
-8. [Docker Images](#docker-images)
-   - [Existing Docker Images](#existing-docker-images)
-   - [Building Our Own Images](#building-our-own-images)
-   - [Image Management](#image-management)
-9. [Docker Containers](#docker-containers)
-   - [Benefits](#benefits-1)
-   - [States of a Container](#states-of-a-container)
-10. [Docker Volumes](#docker-volumes)
-11. [Docker Best Practices](#docker-best-practices)
-12. [Dockerfile](#dockerfile)
-    - [Keywords](#keywords)
-    - [Examples](#examples)
-13. [Building an Image](#building-an-image)
-    - [Example](#example)
-    - [Create Image with Commit](#create-image-with-commit)
-    - [Image Management](#image-management-1)
-14. [Docker Compose](#docker-compose)
-    - [Compose File Components](#compose-file-components)
-    - [Compose File Options](#compose-file-options)
-    - [Examples](#examples-1)
-
----
-
 ## What is Docker
 
 Docker is an open-source project that automates the deployment of software applications inside containers by providing an additional layer of abstraction and automation of OS-level virtualization on Linux.
