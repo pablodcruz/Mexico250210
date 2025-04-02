@@ -1,7 +1,3 @@
-Sure! Below is a structured Markdown document based on the content you provided. You can manually add images where placeholders are indicated.
-
----
-
 # Docker
 
 ## Table of Contents
@@ -248,30 +244,6 @@ Containers are managed by the Docker Daemon as part of the Docker Engine, allowi
 
 ---
 
-## Docker Volumes
-
-Containers are typically stateless, but sometimes you need data to persist even if the container stops.
-
-- **Managed Using:**
-  - CLI
-  - Docker API
-- **Facilitates:**
-  - Sharing data between containers.
-  - Decoupling host and container.
-  - Storing data remotely.
-  - Moving or backing up data between hosts.
-- **Benefits:**
-  - Keeps containers slim by saving data in volumes instead of the writable layer.
-
----
-
-## Docker Best Practices
-
-- Follow the [Dockerfile Best Practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
-- Adhere to [Docker Best Practices](https://docs.docker.com/get-started/overview-best-practices/)
-
----
-
 ## Dockerfile
 
 A `Dockerfile` is a script containing a series of instructions on how to build a Docker image.
@@ -425,6 +397,101 @@ docker build -t java-hello-world .
 
 *Note: Don't forget the `.` at the end, which specifies the current directory as the build context.*
 
+## Running Docker on EC2 (Spring Boot App with RDS)
+
+### Step-by-Step Guide
+
+#### 1. SSH into your EC2 instance
+```bash
+ssh -i <your-key.pem> ec2-user@<your-ec2-public-ip>
+```
+
+#### 2. Install Docker (if not installed)
+```bash
+sudo yum update -y
+sudo yum install docker -y
+```
+
+#### 3. Start Docker service
+```bash
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+
+#### 4. (Optional) Add your user to the docker group
+```bash
+sudo usermod -aG docker $USER
+newgrp docker  # Refresh group without logout
+```
+
+#### 5. Create a Dockerfile
+```dockerfile
+FROM eclipse-temurin:17-jdk-alpine
+WORKDIR /app
+COPY todo-app.jar app.jar
+EXPOSE 8080
+CMD ["java", "-jar", "app.jar"]
+```
+
+#### 6. Copy your JAR and Dockerfile to the EC2 instance
+Use SCP or Git:
+```bash
+scp -i <your-key.pem> target/todo-app.jar ec2-user@<ip>:/home/ec2-user/
+scp -i <your-key.pem> Dockerfile ec2-user@<ip>:/home/ec2-user/
+```
+`ls` in EC2 to verify the files exist
+
+#### 7. Build the Docker image
+```bash
+docker build -t todo-app .
+```
+
+#### 8. Run the container with RDS connection (env vars)
+```bash
+docker run -p 8080:8080 \
+  -e SPRING_DATASOURCE_URL=jdbc:postgresql://<rds-endpoint>:5432/<db> \
+  -e SPRING_DATASOURCE_USERNAME=<your-username> \
+  -e SPRING_DATASOURCE_PASSWORD=<your-password> \
+  todo-app
+```
+
+#### 9. Open EC2 port 8080
+- Go to AWS EC2 console > Security Groups > Inbound Rules
+- Add custom TCP rule: port **8080**, source: **0.0.0.0/0** (or restrict it)
+
+---
+
+## Common Docker Commands (Quick Reference)
+
+### Image Commands
+```bash
+docker build -t my-app .          # Build image from Dockerfile
+docker images                     # List local images
+docker rmi <image-name>           # Remove an image
+docker pull <image-name>          # Download from Docker Hub
+```
+
+### Container Commands
+```bash
+docker run -p 8080:8080 my-app    # Run container
+
+docker ps                         # List running containers
+docker ps -a                      # List all containers (including stopped)
+docker stop <container-id>        # Stop a running container
+docker rm <container-id>          # Remove a container
+```
+
+### Debugging & Logs
+```bash
+docker logs <container-id>        # View logs from container
+docker exec -it <id> /bin/sh      # Exec into a running container
+```
+
+### Clean Up
+```bash
+docker system prune               # Remove unused containers/images
+```
+
 ### Create Image with Commit
 
 If you have a running container and make changes (e.g., install software), you can commit these changes to create a new image.
@@ -442,31 +509,6 @@ docker commit [flags] CONTAINER <imagename>
   docker images
   docker images -a  # Includes hidden images
   ```
-
----
-
-## Docker Containers
-
-A Docker container is a runnable, isolated instance of a set of processes and their dependencies. It is built from a Docker image, which outlines everything the processes need.
-
-Containers are managed by the Docker Daemon as part of the Docker Engine, ensuring they are standardized and highly portable.
-
-### Benefits
-
-- **Secure:** Isolation and virtualization enhance security.
-- **Standardized and Portable:** "Write once, run anywhere."
-- **Lightweight:** Shares the host OS kernel.
-- **Flexible and Loosely Coupled**
-- **Scalable:** Easily spin up and scale containers quickly.
-
-### States of a Container
-
-- **Created**
-- **Restarting**
-- **Running**
-- **Paused**
-- **Exited**
-- **Dead**
 
 ---
 
@@ -808,9 +850,5 @@ networks:
 
 3. **Access WordPress:**
    Open your browser and navigate to [http://localhost:8000/](http://localhost:8000/).
-
----
-
-*Feel free to add images where necessary by replacing the placeholder paths with your actual image paths.*
 
 ---
