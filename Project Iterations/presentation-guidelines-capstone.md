@@ -113,14 +113,10 @@
 
 ---
 
-Absolutely! Here's **Slide 10: Challenges** reformatted to match your preferred style while keeping all the content improvements and added solutions:
-
----
-
 #### **Slide 10: Challenges**
 - **Contents:**
   Reflect on challenges faced during Iteration 3 and explain how they were addressed. Here are some example to choose from, or create your own:
-  
+
 - **Time Management & Prioritization**
   - *Challenge:* Balancing project work with assignments, QC interviews, and interview prep limited focused development time.
   - *Solution:* The team used sprint planning to break DevOps tasks into smaller units and coordinated work around known time blocks. Shared calendars and clear delegation helped minimize blockers.
