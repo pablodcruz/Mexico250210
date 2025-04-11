@@ -1,50 +1,5 @@
 ## 📚 **Study Guide for DevOps (CI/CD), AWS, Jenkins, and Docker, Event Driven Architecture, and AI Enablement Exams**
 
----
-
-### **Table of Contents**
-
-1. [AWS Fundamentals](#aws-fundamentals)
-    - [Amazon RDS](#amazon-rds)
-    - [Amazon EC2](#amazon-ec2)
-    - [AWS Security Groups](#aws-security-groups)
-    - [AWS EC2 Autoscaling](#aws-ec2-autoscaling)
-    - [Amazon S3](#amazon-s3)
-    - [SSH Commands for EC2](#ssh-commands-for-ec2)
-    - [IAM for Programmatic Access](#iam-for-programmatic-access)
-    - [Regions and Availability Zones](#regions-and-availability-zones)
-2. [DevOps and Jenkins](#devops-and-jenkins)
-    - [DevOps Principles and Goals](#devops-principles-and-goals)
-    - [Continuous Integration (CI)](#continuous-integration-ci)
-    - [Continuous Deployment (CD)](#continuous-deployment-cd)
-    - [Jenkins Overview](#jenkins-overview)
-    - [Jenkins Pipelines](#jenkins-pipelines)
-    - [Jenkins Integration with Docker](#jenkins-integration-with-docker)
-3. [Docker](#docker)
-    - [Docker Basics](#docker-basics)
-    - [Docker Commands](#docker-commands)
-    - [Dockerfile Essentials](#dockerfile-essentials)
-    - [Containers vs Virtual Machines](#containers-vs-virtual-machines)
-4. [Messaging Systems and Event-Driven Architecture](#messaging-systems-and-event-driven-architecture)
-    - [Core Concepts](#core-concepts)
-    - [Apache Kafka](#apache-kafka)
-    - [Message Brokers](#message-brokers)
-    - [Benefits of Event-Driven Architecture](#benefits-of-event-driven-architecture)
-5. [AI-Enabled Development](#ai-enabled-development)
-    - [Prompt Engineering for Code](#prompt-engineering-for-code)
-    - [AI Tools in Development](#ai-tools-in-development)
-    - [Best Practices and Ethical Considerations](#best-practices-and-ethical-considerations)
-6. [Git](#git)
-    - [Core Git Commands](#core-git-commands)
-    - [Branching and Merging](#branching-and-merging)
-    - [Conflict Resolution](#conflict-resolution)
-    - [.gitignore and Repository Management](#gitignore-and-repository-management)
-    - [Git vs GitHub](#git-vs-github)
-7. [Study Tips and Resources](#study-tips-and-resources)
-    - [Flashcards](#flashcards)
-
----
-
 ## 🟢 **1. AWS Fundamentals**
 
 ### **1.1 Amazon RDS**
@@ -494,6 +449,45 @@ CMD ["python3", "app.py"]
 | **Use Cases**          | Microservices, CI/CD pipelines      | Legacy applications, full-stack apps|
 
 ---
+
+## 🟣 **Extra Need to know for DevOps: 
+  ### Maven Build Life Cycle
+ - **validate** - validate the project is correct and all necessary information is available
+ - **compile** - compile the source code of the project
+ - **test** - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
+ - **package** - take the compiled code and package it in its distributable format, such as a JAR.
+ - **verify** - run any checks on results of integration tests to ensure quality criteria are met
+ - **install** - install the package into the local repository, for use as a dependency in other projects locally
+ - **deploy** - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
+
+### SonarLint
+  **Description:**  
+  SonarLint is a real-time static code analysis tool integrated into IDEs, providing immediate feedback on code quality issues.
+
+  **Key Points:**
+  - Provides **real-time feedback** on code quality as you type.
+  - Detects common issues: **bugs, vulnerabilities, and code smells**.
+  - Integrates seamlessly with popular IDEs (IntelliJ, Eclipse, VS Code, Visual Studio).
+  - Helps enforce consistent coding standards.
+  - Lightweight and fast; no external server required.
+  - Enhances developer productivity by catching problems early.
+  - Supports multiple languages, including Java, JavaScript, Python, C#, and more.
+
+  ---
+
+### SonarCloud
+  **Description:**  
+  SonarCloud is a cloud-based code quality management tool, providing continuous inspection and analysis for code hosted in repositories.
+
+  **Key Points:**
+  - **Cloud-based service** for continuous code quality monitoring.
+  - Integrates directly with cloud-based platforms (GitHub, GitLab, Azure DevOps, Bitbucket).
+  - Provides detailed code quality metrics and dashboards.
+  - Identifies critical issues: **bugs, vulnerabilities, security hotspots, and technical debt**.
+  - Facilitates automated code reviews with actionable insights.
+  - Supports a wide variety of programming languages and technologies.
+  - Enables collaboration through code-quality gates and pull-request analysis.
+  - Ideal for teams practicing **Continuous Integration/Continuous Deployment (CI/CD)**.
 
 ## 🔴 **4. Messaging Systems and Event-Driven Architecture**
 
