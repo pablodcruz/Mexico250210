@@ -63,22 +63,6 @@ Achieved once all steps are automated.
 
 ---
 
-## Cloud Computing
-
-### In Brief - Using Someone Else's Computer/Hardware
-The Cloud - There is no single cloud. The concept is that computing resources are available through the internet that provide for actual cloud computing. In practice, these are networks of machines provided by a company that can host and process data for you, so that local server is no longer needed.  
-There are many cloud providers, and each has their own independent network of resources. These include AWS (Amazon Web Services), GCP (Google), Azure (Microsoft), and many others.
-
----
-
-## Additionally, there are deployment models that combine elements of these service models:
-- **Public Cloud**: A public cloud is a cloud computing environment where resources are provided over the internet and managed by a third-party provider. Examples include Amazon Web Services, Microsoft Azure, and Google Cloud Platform.
-- **Private Cloud**: A private cloud is a cloud computing environment that is provisioned and managed within an organization’s own infrastructure, often on-premises.
-- **Hybrid Cloud**: A hybrid cloud combines public and private cloud environments, allowing data and applications to be shared between them.  
-It’s worth noting that some sources may group these models differently or use additional terms, such as “Serverless Computing” or “Function-as-a-Service (FaaS)”. However, the three main service models (SaaS, PaaS, and IaaS) provide a general framework for understanding the different types of cloud computing offerings.
-
----
-
 ## AWS - Amazon Web Services
 
 ### Amazon's Cloud Offerings
@@ -132,6 +116,10 @@ Amazon Elastic Block Store (Amazon EBS) provides block-level storage volumes for
 ## EBS vs S3
 - **S3** is for large amounts of data compared to EBS.
 - **EBS** is faster than S3.
+
+## Instance Store:
+ - **Instance Store** is a temporary storage solution that is physically attached to the host machine running the EC2 instance. 
+ - Data on instance store is lost when the instance is stopped, terminated, or if the host hardware fails. 
 
 ---
 

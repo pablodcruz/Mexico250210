@@ -123,6 +123,12 @@ Images are the templates that outline all dependencies for a particular containe
 
 A container is the runnable instance of a set of processes and their dependencies.
 
+### Docker Registry
+
+ - Docker Registry is the cloud storage for Docker Images.
+ - Docker Hub is one default registry for storing the images.
+ - The developers can store the images in public and private registries.
+ - When the docker pull command is executed in the docker client, the particular image is downloaded from the docker image registry.
 ---
 
 ## Typical Flow

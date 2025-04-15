@@ -334,6 +334,13 @@ ssh -i ~/keys/my-key-pair.pem ec2-user@ec2-203-0-113-25.compute-1.amazonaws.com
 - **Efficiency:** Share the host OS kernel, making containers lightweight and resource-efficient.
 - **Isolation:** Encapsulate applications and their dependencies, preventing conflicts and enhancing security.
 
+ **Docker Registry**
+
+ - Docker Registry is the cloud storage for Docker Images.
+ - Docker Hub is one default registry for storing the images.
+ - The developers can store the images in public and private registries.
+ - When the docker pull command is executed in the docker client, the particular image is downloaded from the docker image registry.
+
 ### **3.2 Docker Commands**
 
 **Common Commands:**
