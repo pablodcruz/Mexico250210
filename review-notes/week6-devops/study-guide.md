@@ -1,3 +1,16 @@
+## What is Cloud Computing?
+ - Cloud computing refers to delivering computing resources (like servers, storage, databases, networking, software) over the internet ("the cloud") to offer faster innovation, flexible resources, and economies of scale. Instead of owning and maintaining physical data centers and servers, you can access these resources on-demand from a cloud provider.
+
+### Why is Cloud Computing Relevant to DevOps?
+ - Scalability and Flexibility: Supports the rapid scaling up or down of resources based on application demands.
+ - Automation: Integral for continuous integration, delivery, and deployment (CI/CD pipelines).
+ - Cost Efficiency: Pay-as-you-go pricing models align with the incremental and iterative nature of DevOps.
+ - Global Reach: Enables teams across geographies to collaborate in real-time, essential for DevOps practices.
+### Types of Cloud Services Supporting DevOps
+ - IaaS (Infrastructure as a Service): Provides virtualized hardware and network infrastructure.
+ - PaaS (Platform as a Service): Offers tools and frameworks for application development and deployment.
+ - SaaS (Software as a Service): Supplies software applications that can streamline DevOps workflows.
+
 ## 📚 **Study Guide for DevOps (CI/CD), AWS, Jenkins, and Docker, Event Driven Architecture, and AI Enablement Exams**
 
 ## 🟢 **1. AWS Fundamentals**
