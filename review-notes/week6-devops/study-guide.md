@@ -7,9 +7,9 @@
  - Cost Efficiency: Pay-as-you-go pricing models align with the incremental and iterative nature of DevOps.
  - Global Reach: Enables teams across geographies to collaborate in real-time, essential for DevOps practices.
 ### Types of Cloud Services Supporting DevOps
- - IaaS (Infrastructure as a Service): Provides virtualized hardware and network infrastructure.
- - PaaS (Platform as a Service): Offers tools and frameworks for application development and deployment.
- - SaaS (Software as a Service): Supplies software applications that can streamline DevOps workflows.
+ - IaaS (Infrastructure as a Service): Provides virtualized hardware and network infrastructure. (s3, ec2)
+ - PaaS (Platform as a Service): Offers tools and frameworks for application development and deployment. (docker, firebase)
+ - SaaS (Software as a Service): Supplies software applications that can streamline DevOps workflows (salesforce, zoom, word, excel).
 
 ## 📚 **Study Guide for DevOps (CI/CD), AWS, Jenkins, and Docker, Event Driven Architecture, and AI Enablement Exams**
 
