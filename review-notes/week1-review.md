@@ -173,6 +173,125 @@
     - `git log` to view newly created commit
     - `git push` to push commit to remote repository
 
+## **6.2 Branching and Merging**
+
+**Branching:**
+- **Create a New Branch:**
+  ```bash
+  git branch <branch-name>
+  git checkout <branch-name>
+  ```
+  - Alternatively, create and switch in one command:
+    ```bash
+    git checkout -b <branch-name>
+    ```
+  
+- **List Branches:**
+  ```bash
+  git branch
+  ```
+
+**Merging:**
+- **Merge a Branch into the Current Branch:**
+  ```bash
+  git merge <branch-name>
+  ```
+  
+- **Fast-Forward vs. Three-Way Merge:**
+  - **Fast-Forward:** Occurs when the current branch has no unique commits.
+  - **Three-Way Merge:** Combines changes from divergent branches.
+
+**Best Practices:**
+- **Use Feature Branches:** Isolate development of new features to specific branches.
+- **Regularly Merge Changes:** Keep branches up-to-date to minimize conflicts.
+- **Descriptive Branch Names:** Use clear and consistent naming conventions (e.g., `feature/login`, `bugfix/header-error`).
+
+### **6.3 Conflict Resolution**
+
+**Understanding Merge Conflicts:**
+- Occur when changes in different branches affect the same part of a file and cannot be automatically reconciled by Git.
+
+**Resolving Conflicts:**
+1. **Identify Conflicted Files:**
+   ```bash
+   git status
+   ```
+   
+2. **Open Conflicted Files:**
+   - Look for conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`).
+   
+3. **Manually Resolve Conflicts:**
+   - Decide which changes to keep or combine.
+   
+4. **Mark Conflicts as Resolved:**
+   ```bash
+   git add <file-name>
+   ```
+   
+5. **Commit the Merge:**
+   ```bash
+   git commit
+   ```
+
+**Best Practices:**
+- **Communicate with Team Members:** Understand the intent behind conflicting changes.
+- **Use Merge Tools:** Utilize GUI-based tools like `meld`, `kdiff3`, or IDE-integrated tools for easier conflict resolution.
+- **Test After Merging:** Ensure that resolved conflicts do not introduce bugs or issues.
+
+### **6.4 .gitignore and Repository Management**
+
+**.gitignore File:**
+- **Purpose:** Specifies intentionally untracked files that Git should ignore.
+- **Common Uses:**
+  - Ignoring build artifacts (e.g., `dist/`, `build/`).
+  - Ignoring sensitive information (e.g., `.env` files).
+  - Ignoring system-specific files (e.g., `.DS_Store`, `Thumbs.db`).
+
+**Example `.gitignore`:**
+```
+    # Node.js
+    node_modules/
+    dist/
+
+    # Python
+    __pycache__/
+    *.pyc
+
+    # Environment Variables
+    .env
+
+    # OS Files
+    .DS_Store
+    Thumbs.db
+```
+
+**Best Practices:**
+- **Define Clear Rules:** Ensure that necessary files are tracked while unnecessary or sensitive files are ignored.
+- **Update Regularly:** Modify `.gitignore` as project requirements evolve.
+- **Global Gitignore:** Configure a global `.gitignore` for files that should be ignored across all repositories on your machine.
+
+### **6.5 Git vs GitHub**
+
+**Git:**
+- **Definition:** A distributed version control system that tracks changes in source code during software development.
+- **Key Features:**
+  - **Local Repositories:** Each developer has a full copy of the repository history.
+  - **Branching and Merging:** Efficient handling of branches for feature development.
+  - **Commit History:** Detailed records of changes over time.
+
+**GitHub:**
+- **Definition:** A cloud-based platform that hosts Git repositories and provides collaboration features.
+- **Key Features:**
+  - **Remote Repositories:** Centralized storage for Git repositories.
+  - **Pull Requests:** Facilitate code reviews and discussions before merging changes.
+  - **Issue Tracking:** Manage bugs, enhancements, and tasks.
+  - **CI/CD Integration:** Integrate with tools like Jenkins, Travis CI, or GitHub Actions for automated workflows.
+  - **Collaboration Tools:** Team management, project boards, and wikis.
+
+**Key Differences:**
+- **Functionality:** Git is the version control tool, while GitHub is a platform for hosting Git repositories with additional collaboration features.
+- **Usage:** Git can be used locally without GitHub, but GitHub relies on Git for version control.
+
 # Java Fundamentals
 - High level programming language
 - Features

@@ -673,185 +673,96 @@ CMD ["python3", "app.py"]
 
 ---
 
-## 🟠 **6. Git**
+### **6.1 Difference Between Discriminative and Generative Language Models**
 
-### **6.1 Core Git Commands**
-
-**Essential Commands:**
-- **Initialize a Repository:**
-  ```bash
-  git init
-  ```
+- **Discriminative Models**: Learn the boundary between classes (e.g., "Is this sentence positive or negative?"). They predict labels given data.  
+  - *Example:* Logistic Regression, BERT (when fine-tuned for classification).
   
-- **Clone a Repository:**
-  ```bash
-  git clone <repository-url>
-  ```
-  
-- **Check Repository Status:**
-  ```bash
-  git status
-  ```
-  
-- **Add Changes to Staging:**
-  ```bash
-  git add <file-name>
-  git add .
-  ```
-  
-- **Commit Changes:**
-  ```bash
-  git commit -m "Commit message"
-  ```
-  
-- **Push Changes to Remote:**
-  ```bash
-  git push origin <branch-name>
-  ```
-  
-- **Pull Changes from Remote:**
-  ```bash
-  git pull origin <branch-name>
-  ```
-  
-- **Fetch Changes from Remote:**
-  ```bash
-  git fetch origin
-  ```
-  
-- **View Commit History:**
-  ```bash
-  git log
-  ```
-
-### **6.2 Branching and Merging**
-
-**Branching:**
-- **Create a New Branch:**
-  ```bash
-  git branch <branch-name>
-  git checkout <branch-name>
-  ```
-  - Alternatively, create and switch in one command:
-    ```bash
-    git checkout -b <branch-name>
-    ```
-  
-- **List Branches:**
-  ```bash
-  git branch
-  ```
-
-**Merging:**
-- **Merge a Branch into the Current Branch:**
-  ```bash
-  git merge <branch-name>
-  ```
-  
-- **Fast-Forward vs. Three-Way Merge:**
-  - **Fast-Forward:** Occurs when the current branch has no unique commits.
-  - **Three-Way Merge:** Combines changes from divergent branches.
-
-**Best Practices:**
-- **Use Feature Branches:** Isolate development of new features to specific branches.
-- **Regularly Merge Changes:** Keep branches up-to-date to minimize conflicts.
-- **Descriptive Branch Names:** Use clear and consistent naming conventions (e.g., `feature/login`, `bugfix/header-error`).
-
-### **6.3 Conflict Resolution**
-
-**Understanding Merge Conflicts:**
-- Occur when changes in different branches affect the same part of a file and cannot be automatically reconciled by Git.
-
-**Resolving Conflicts:**
-1. **Identify Conflicted Files:**
-   ```bash
-   git status
-   ```
-   
-2. **Open Conflicted Files:**
-   - Look for conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`).
-   
-3. **Manually Resolve Conflicts:**
-   - Decide which changes to keep or combine.
-   
-4. **Mark Conflicts as Resolved:**
-   ```bash
-   git add <file-name>
-   ```
-   
-5. **Commit the Merge:**
-   ```bash
-   git commit
-   ```
-
-**Best Practices:**
-- **Communicate with Team Members:** Understand the intent behind conflicting changes.
-- **Use Merge Tools:** Utilize GUI-based tools like `meld`, `kdiff3`, or IDE-integrated tools for easier conflict resolution.
-- **Test After Merging:** Ensure that resolved conflicts do not introduce bugs or issues.
-
-### **6.4 .gitignore and Repository Management**
-
-**.gitignore File:**
-- **Purpose:** Specifies intentionally untracked files that Git should ignore.
-- **Common Uses:**
-  - Ignoring build artifacts (e.g., `dist/`, `build/`).
-  - Ignoring sensitive information (e.g., `.env` files).
-  - Ignoring system-specific files (e.g., `.DS_Store`, `Thumbs.db`).
-
-**Example `.gitignore`:**
-```
-# Node.js
-node_modules/
-dist/
-
-# Python
-__pycache__/
-*.pyc
-
-# Environment Variables
-.env
-
-# OS Files
-.DS_Store
-Thumbs.db
-```
-
-**Best Practices:**
-- **Define Clear Rules:** Ensure that necessary files are tracked while unnecessary or sensitive files are ignored.
-- **Update Regularly:** Modify `.gitignore` as project requirements evolve.
-- **Global Gitignore:** Configure a global `.gitignore` for files that should be ignored across all repositories on your machine.
-
-### **6.5 Git vs GitHub**
-
-**Git:**
-- **Definition:** A distributed version control system that tracks changes in source code during software development.
-- **Key Features:**
-  - **Local Repositories:** Each developer has a full copy of the repository history.
-  - **Branching and Merging:** Efficient handling of branches for feature development.
-  - **Commit History:** Detailed records of changes over time.
-
-**GitHub:**
-- **Definition:** A cloud-based platform that hosts Git repositories and provides collaboration features.
-- **Key Features:**
-  - **Remote Repositories:** Centralized storage for Git repositories.
-  - **Pull Requests:** Facilitate code reviews and discussions before merging changes.
-  - **Issue Tracking:** Manage bugs, enhancements, and tasks.
-  - **CI/CD Integration:** Integrate with tools like Jenkins, Travis CI, or GitHub Actions for automated workflows.
-  - **Collaboration Tools:** Team management, project boards, and wikis.
-
-**Key Differences:**
-- **Functionality:** Git is the version control tool, while GitHub is a platform for hosting Git repositories with additional collaboration features.
-- **Usage:** Git can be used locally without GitHub, but GitHub relies on Git for version control.
+- **Generative Models**: Learn how data is generated. They can produce new data instances by modeling the full distribution.  
+  - *Example:* GPT, which generates full text responses.
 
 ---
 
-## 🔴 **7. Study Tips and Resources**
+### **6.2 Using Prompt Engineering for Creative Writing**
 
-### **7.1 Flashcards**
+- When using GenAI to generate creative writing samples:
+  - **Be descriptive in tone and genre**: "Write a 300-word horror story set in a haunted library."
+  - **Provide structure or character seeds**: Include prompts like "Include a plot twist and dialogue between a child and a ghost."
+  - **Iterate with refinement**: Adjust tone, pacing, and creativity based on outputs.
+  - **Balance originality with constraints**: Guide the AI with rules while allowing narrative freedom.
 
-**Purpose:**
-- Reinforce key concepts, definitions, and commands through active recall.
+---
 
-**Tools:**
-- **Anki:** A spaced repetition flashcard program.
-- **Quizlet:** An online platform for creating and studying flashcards.
+### **6.3 How to Prevent Hallucinations**
+
+- **Hallucinations** refer to confident but incorrect outputs from AI.
+- Prevention strategies:
+  - **Add factual constraints** in the prompt
+  - **Provide grounding data** (like reference text or examples)
+  - **Manually review** AI output
+  - **Use retrieval-augmented generation (RAG)** for fact-based completions
+
+---
+
+### **6.4 GitHub Copilot and How It Works**
+
+- GitHub Copilot is an AI coding assistant powered by OpenAI Codex.
+- **It provides code suggestions** directly in your IDE based on the current file and context.
+- Copilot uses:
+  - Context from comments and function names
+  - Pattern recognition from billions of lines of code
+  - Auto-completion suggestions as you type
+
+---
+
+### **6.5 What is AI Tooling?**
+
+- **AI Tooling** refers to a growing suite of **AI-powered developer tools** that assist with various aspects of software development. These tools help automate repetitive tasks, improve code quality, and accelerate workflows.
+
+#### 🔧 Tool Categories and Examples (should know 3-4 examples):
+
+- **Code Generation Tools**  
+  Help you write functions, classes, or entire files based on context or comments.
+  - Examples: **GitHub Copilot**, **Tabnine**, **Amazon CodeWhisperer**, **Codeium**
+
+- **Test Case Generators**  
+  Automatically create unit tests based on function definitions and expected behavior.
+  - Examples: **Diffblue Cover (for Java)**, **CodiumAI**, **Ponicode**, **Testim**
+
+- **Documentation Tools**  
+  Generate comments, docstrings, or entire technical documentation based on code.
+  - Examples: **Kite**, **Mintlify**, **CodeRabbit**, **Documatic**
+
+- **Code Review and Analysis Assistants**  
+  Analyze your code for style issues, security risks, and performance improvements.
+  - Examples: **DeepCode (by Snyk)**, **SonarQube AI features**, **Codiga**, **CodeGuru (AWS)**
+
+### **6.6 Using GenAI in Code Analysis**
+
+- GenAI can assist in code analysis by:
+  - Detecting duplicated or redundant code
+  - Identifying anti-patterns or bad practices
+  - Recommending refactors
+  - Providing inline explanations or documentation
+  - Assisting with bug detection and fix suggestions
+
+---
+
+## **7. AI vs ML vs GenAI**
+
+### **AI (Artificial Intelligence)**  
+- Broad field focused on making machines smart  
+- Includes rules, logic, learning, and decision-making  
+- *Example:* Voice assistants, chatbots
+
+### **ML (Machine Learning)**  
+- Subset of AI that **learns from data**  
+- Makes predictions or finds patterns  
+- *Example:* Fraud detection, recommendation engines
+
+### **GenAI (Generative AI)**  
+- Subset of ML that **creates new content**  
+- Generates text, code, images, etc.  
+- *Example:* ChatGPT, GitHub Copilot, DALL·E
+
+So: **AI** is the big field → **ML** is learning from data → **GenAI** is creating content from that learning.
