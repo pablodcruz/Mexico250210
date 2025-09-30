@@ -1,0 +1,133 @@
+# **Presentation Structure – Iteration IV**
+
+**Duration:** 10–12 minutes + 3 min q&a
+
+**Sections**:
+
+1. **Introduction**: Team intro + project recap (Loan Management Portal, agile iterations).
+2. **Outline**: What the presentation will cover.
+3. **Problem Statement**: Why Iteration 4 was needed (manual deployment, lack of automation, no cloud integration).
+4. **Solution Overview**: Cloud migration + CI/CD pipeline.
+5. **Tech Stack**: Updated technologies for Iteration 4.
+6. **Implementation**: Pipeline, AWS hosting, Docker/Podman, Python integration.
+7. **Demo**: Show deployed app + GitLab pipeline in action.
+8. **Challenges**: Issues with AWS, Docker networking, GitLab CI/CD.
+9. **Future Enhancements**: Kubernetes, IaC (Terraform), advanced monitoring.
+10. **Q\&A**: Open floor for questions.
+
+---
+
+# **PowerPoint Outline**
+
+### **Slide 1: Title Slide**
+
+* Project Title: **"Financial Loan Management Portal – Iteration IV"**
+* Team Members’ Names
+* Date + Institution/Program
+
+---
+
+### **Slide 2: Outline**
+
+* Problem Statement
+* Solution Overview
+* Tech Stack
+* Implementation
+* Demo
+* Challenges
+* Future Enhancements
+
+---
+
+### **Slide 3: Problem Statement**
+
+* Previous iteration (Spring Boot + Angular) was deployed but **lacked automation**.
+* Manual deployments → prone to errors.
+* No CI/CD → harder to test and deliver quickly.
+* Limited scalability and monitoring.
+
+---
+
+### **Slide 4: Solution Overview**
+
+* Migrated to **AWS (EC2 + RDS)** for cloud hosting.
+* Implemented **Docker/Podman** for containerization.
+* Set up **GitLab CI/CD pipelines** for automated build, test, and deploy.
+* Introduced **Python scripts** for connecting to external data sources.
+
+---
+
+### **Slide 5: Tech Stack**
+
+* **Frontend**: Angular, TypeScript
+* **Backend**: Spring Boot, Java
+* **Additional Services**: Python for external data integration
+* **DevOps Tools**: GitLab CI/CD, Docker/Podman
+* **Cloud**: AWS EC2 (compute), RDS (database)
+* **Database**: PostgreSQL
+
+---
+
+### **Slide 6: Architecture Diagram**
+
+* Angular frontend container → EC2
+* Spring Boot backend container → EC2
+* AWS RDS (PostgreSQL)
+* GitLab pipeline builds, tests, deploys Docker images to EC2
+* Optional: Python service pulling external data
+
+---
+
+### **Slide 7: Implementation**
+
+* Created Dockerfiles for frontend and backend.
+* Configured GitLab pipeline (`.gitlab-ci.yml`) to:
+
+  * Run tests → Build → Deploy.
+* Deployed backend and frontend containers on AWS EC2.
+* Connected Spring Boot to AWS RDS database.
+* Integrated Python script for additional data processing.
+
+---
+
+### **Slide 8: Live Demo**
+
+* Access public URL of Loan Management Portal.
+* Show:
+
+  * Login/Register.
+  * Create + manage loan applications.
+  * Manager approving/rejecting applications.
+* Display GitLab pipeline dashboard running successfully.
+
+---
+
+### **Slide 9: Challenges**
+
+* Learning curve with GitLab CI/CD (YAML errors, runner configuration).
+* Docker networking issues between frontend and backend containers.
+* AWS credential/security setup.
+* Database migration to RDS.
+
+---
+
+### **Slide 10: Future Enhancements**
+
+* Add **Kubernetes** for container orchestration.
+* Use **Terraform** (IaC) for automated AWS provisioning.
+* Integrate **AWS CloudWatch** or Prometheus/Grafana for monitoring.
+* Add S3 bucket for file uploads (loan docs).
+
+---
+
+### **Slide 11: Conclusion**
+
+* Iteration 4 successfully added **cloud deployment + CI/CD automation**.
+* The Loan Management Portal is now **scalable, automated, and cloud-ready**.
+* Team gained experience in **DevOps practices** and cloud integration.
+
+---
+
+### **Slide 12: Q\&A**
+
+* Invite questions.
